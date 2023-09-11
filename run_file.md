@@ -21,7 +21,7 @@ for(n_run in 1:length(scenarios)){
   input_data_ids[n_run]=orderly2::orderly_run("01_input_data_setup",
   list(vacc_data_file=vacc_data_files[n_run],pop_data_file=pop_data_file,country_list_file=country_list_file))
 }
-write.csv(data.frame(scenario=scenarios,id=input_data_ids),"shared/input_data_list.csv")
+#write.csv(data.frame(scenario=scenarios,id=input_data_ids),"shared/input_data_list.csv")
 
 #Calculate FOI/R0 values for each selected country from regional values, and load vaccine efficacy values
 #Median values for central estimates and sets of values for stochastic calculations supplied
@@ -38,7 +38,7 @@ for(n_run in 1:length(scenarios)){
   list(life_exp_file="gavi_life_expectancy.csv",country_list_file="countries_select.csv",input_id=input_data_ids[n_run],
   p_severe_inf=0.12,p_death_severe_inf=0.39,YLD_per_case=0.006486,n_reps=1))
 }
-write.csv(data.frame(scenario=scenarios,id=central_estimate_ids),"shared/output_list1_central_estimates.csv")
+#write.csv(data.frame(scenario=scenarios,id=central_estimate_ids),"shared/output_list1_central_estimates.csv")
 
 #Run stochastic burden calculations using all parameter sets (containing individual FOI, R0 and vaccine efficacy values), optionally for a subset of countries
 stochastic_ids=rep("",4)
@@ -47,7 +47,7 @@ for(n_run in 1:length(scenarios)){
   list(life_exp_file="gavi_life_expectancy.csv",country_list_file="countries_select.csv",input_id=input_data_ids[n_run],
   p_severe_inf=0.12,p_death_severe_inf=0.39,YLD_per_case=0.006486,n_reps=1,flag_cluster=FALSE))
 }
-write.csv(data.frame(scenario=scenarios,id=stochastic_ids),"shared/output_list2_stochastic.csv")
+#write.csv(data.frame(scenario=scenarios,id=stochastic_ids),"shared/output_list2_stochastic.csv")
 
 #Checking which results folder is for which scenario using metadata
 #orderly2::orderly_metadata(dir("archive/01_input_data_setup")[1])$parameters$vacc_data_file

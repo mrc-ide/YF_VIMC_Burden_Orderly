@@ -9,9 +9,6 @@
 # User-specific files
 .Ruserdata
 
-# Example code in package build process
-*-Ex.R
-
 # Output files from R CMD build
 /*.tar.gz
 
@@ -47,3 +44,11 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# ---VVV--- added by orderly ---VVV----------------
+# Don't manually edit content between these markers
+.outpack
+orderly_envir.yml
+draft
+archive
+# ---^^^--- added by orderly ---^^^----------------
