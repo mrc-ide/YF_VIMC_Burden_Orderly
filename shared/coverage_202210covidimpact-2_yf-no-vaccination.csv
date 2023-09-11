@@ -1,0 +1,176 @@
+scenario,set_name,vaccine,gavi_support,activity_type,country_code,country,year,age_first,age_last,age_range_verbatim,target,coverage,gender,proportion_risk
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,AGO,Angola,1988,1,100,<NA>,10582696,0.24926759164952400072,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,AGO,Angola,2016,1,100,<NA>,388146990,0.01833813937414036339,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1940,1,100,default age range,1804940,0.08651934341274529483,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1944,1,100,default age range,1893692,0.52430001018955396663,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1948,1,100,default age range,1986210,0.56563793374701198946,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1952,1,100,default age range,2192855,0.70822809987135804111,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1956,1,100,default age range,2242714,0.66181280980089696175,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1960,1,100,default age range,2345449,0.61309326611029002496,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,1996,1,100,<NA>,5854079,0.03792832064602270209,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BEN,Benin,2005,1,100,<NA>,7687115,0.02691230054036350058,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1940,1,100,default age range,3629515,0.08641600560141410314,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1944,1,100,default age range,3792844,0.52367379166550298564,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1948,1,100,default age range,3966796,0.5649623416334610404,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1952,1,100,default age range,4209322,0.70739458986602399282,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1956,1,100,default age range,4405997,0.66104942370056896106,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1960,1,100,default age range,4646346,0.61240788846416005509,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1983,1,100,<NA>,7028453,0.2315388637259210014,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,1998,1,100,<NA>,10514646,0.00289175774819980984,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2000,1,100,<NA>,11128613,0.01820883181148470059,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2003,1,100,<NA>,12139047,0.00541783556468975001,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2004,0,100,<NA>,13030569,0.09927945942386200151,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2004,1,100,<NA>,25003158,0.00837093851498189965,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2005,1,100,<NA>,12878780,0.10055797148669100294,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,BFA,Burkina Faso,2008,1,100,<NA>,14104278,0.02620992643718289897,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,1945,1,100,default age range,1138646,0.05400864645636949818,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,1948,1,100,default age range,1188958,0.5104090613676770527,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,1952,1,100,default age range,1309784,0.63911960587390903576,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,1956,1,100,default age range,1367967,0.59958962461447196102,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,1960,1,100,default age range,1448468,0.55866136699577295666,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,2006,1,100,<NA>,3968919,0.01019392085361989914,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,2008,1,100,<NA>,8239866,0.02909798876481914896,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CAF,Central African Republic,2009,1,100,<NA>,8366228,0.075289186927760647085,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1940,1,100,default age range,1953462,0.08642655030150489526,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1944,1,100,default age range,2165369,0.52373769166920902673,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1948,1,100,default age range,2373942,0.56503127977071399002,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1952,1,100,default age range,2635404,0.70746953787199395869,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1956,1,100,default age range,2946393,0.66109047194388304014,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1960,1,100,default age range,3352540,0.61242527324665896327,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,1982,1,100,<NA>,8395482,0.00138432047111193991,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2001,1,100,<NA>,16231268,0.21233438569001800156,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2005,1,100,<NA>,17697021,0.0181673470164197999,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2006,1,100,<NA>,18092126,0.04840991989058909817,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2008,1,100,<NA>,18931360,0.10440691482670999557,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2009,1,100,<NA>,19375940,0.00815635764076113982,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CIV,Cote d'Ivoire,2011,1,100,<NA>,20316909,0.03544444139757470247,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1945,1,100,default age range,3638583,0.08083727561692739816,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1948,1,100,default age range,3861695,0.34184684373860202422,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1952,1,100,default age range,4304122,0.33836526635208702407,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1956,1,100,default age range,4624002,0.31521878510695100495,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1980,1,100,<NA>,8273263,0.0073414216222486197,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1987,1,100,<NA>,10288798,0.01468453604751730063,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1990,1,100,<NA>,11308520,0.01925047294094149944,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,1994,1,100,<NA>,12724430,0.00016062386308421901,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2006,1,100,<NA>,17541902,0.04829329194132229996,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2007,1,100,<NA>,18033450,0.00736172117119675024,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2009,1,100,<NA>,19065506,0.00890606004485119084,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2010,1,100,<NA>,39206762,0.01517017879042804971,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2012,1,100,<NA>,20722236,0.06428581105124940576,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,CMR,Cameroon,2013,1,100,<NA>,21301742,0.03205357848100699736,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COD,"Congo, the Democratic Republic of the",1971,1,100,default age range,19737952,0.11415190485975400259,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COD,"Congo, the Democratic Republic of the",2010,1,100,<NA>,61905914,0.00097469632724162404,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COD,"Congo, the Democratic Republic of the",2013,1,100,<NA>,68470643,0.00741279348209681038,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COD,"Congo, the Democratic Republic of the",2014,1,100,<NA>,70804536,0.0397620973883692011,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,1945,1,100,default age range,697810,0.0540622083968061995,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,1948,1,100,default age range,741642,0.51091524883092598319,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,1952,1,100,default age range,827469,0.63971668772023704275,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,1956,1,100,default age range,896279,0.6000466890370880213,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,1960,1,100,default age range,980595,0.55902968706603795024,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,2009,1,100,<NA>,3997561,0.0179088991365776995,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,COG,Congo,2012,1,100,<NA>,4353230,0.00987850912232775963,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,ETH,Ethiopia,2013,1,100,<NA>,92244209,0.00641835780935772014,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1969,1,100,default age range,8171333,0.17118597667331700296,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1970,1,100,default age range,8378726,0.17118504647133800378,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1979,1,100,default age range,10391962,0.25897387284864098467,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1980,1,100,<NA>,10633012,0.15439684785925300581,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1983,1,100,<NA>,11576577,0.02631317662140919902,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1994,1,100,<NA>,15987007,0.00639323810221585978,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,1996,1,100,<NA>,16866792,0.00851617458790535076,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,2005,1,100,<NA>,274767038,0.004532953540654630814615384615385,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,2006,1,100,<NA>,151818520,0.005312410597677634491428571428571,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GHA,Ghana,2012,1,100,<NA>,25203728,0.00950605525606986954,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1940,1,100,default age range,2350304,0.08641819565769849609,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1944,1,100,default age range,2515535,0.52368706322405500497,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1948,1,100,default age range,2684963,0.56497665957511999935,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1952,1,100,default age range,2976998,0.70740822613682197151,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1956,1,100,default age range,3149397,0.66106444618773796407,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,1960,1,100,default age range,3371489,0.61241001325573996006,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2000,1,100,<NA>,7916787,0.10304329021681500611,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2001,1,100,<NA>,8088041,0.12065558398429800102,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2002,1,100,<NA>,8252479,0.19697289734039100106,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2003,1,100,<NA>,8415141,0.06817802965267040494,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2004,1,100,<NA>,8583165,0.05296005497598980233,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2005,1,100,<NA>,17523602,0.10872842037387659558,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2008,1,100,<NA>,9375405,0.01430526328128539984,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2009,1,100,<NA>,9595237,0.00602669361449467006,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GIN,Guinea,2010,1,100,<NA>,9817305,0.02697400290100230094,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,GMB,Gambia,1979,1,100,default age range,590792,0.94999999999999995559,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,KEN,Kenya,1993,1,100,<NA>,25198137,0.04050289692919999823,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,1995,1,100,<NA>,5912292,0.07043351665703530042,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,1997,1,100,<NA>,2240195,0.0475313208690398975,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,1998,1,100,<NA>,2421782,0.07115642633451900456,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2000,1,100,<NA>,2739075,0.05424770369470260228,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2001,1,100,<NA>,2839693,0.02887609710850779984,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2003,1,100,<NA>,2961347,0.00899991814551011002,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2004,1,100,<NA>,6039674,0.013507558069953049665,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2008,1,100,<NA>,3480802,0.083041086330168698,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2009,1,100,<NA>,3623225,0.02875902627047350127,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,LBR,Liberia,2011,1,100,<NA>,3880708,0.03409325343993759722,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1940,1,100,default age range,3907151,0.08641640170296929768,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1944,1,100,default age range,4106604,0.5236761920079130439,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1948,1,100,default age range,4325207,0.56496493122852897706,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1952,1,100,default age range,4621652,0.70739819194959496773,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1956,1,100,default age range,4827879,0.66105202006277796745,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1960,1,100,default age range,5065406,0.61241337704228304695,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,1987,0,14,<NA>,3708861,0.79640064712196700913,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,2004,1,100,<NA>,11836999,0.00119399787502491995,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,2005,1,100,<NA>,12222830,0.18165961249362300167,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MLI,Mali,2006,1,100,<NA>,12631815,0.15413750143206500498,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1940,1,100,default age range,484652,0.08662390642981429578,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1944,1,100,default age range,534104,0.52493365335826402962,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1948,1,100,default age range,588182,0.56632153589409595096,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1952,1,100,default age range,655986,0.7090598318544270029,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1956,1,100,default age range,727384,0.6624588176694119479,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,MRT,Mauritania,1960,1,100,default age range,814036,0.61358627181642499959,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1940,1,100,default age range,1738238,0.08643114107688219805,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1944,1,100,default age range,1996641,0.5237655113853829647,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1948,1,100,default age range,2281915,0.56506129290530504594,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1952,1,100,default age range,2589396,0.707501554909160002,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1956,1,100,default age range,2890585,0.66110997305110696942,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1960,1,100,default age range,3228557,0.61244125682894701157,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NER,Niger,1996,1,100,<NA>,9363982,0.00164321520966307006,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1969,1,100,default age range,52644277,0.27847211820781697655,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1971,1,100,default age range,55089880,0.00990756516664373019,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1974,1,100,default age range,59205794,0.01976253312451569863,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1987,1,100,<NA>,84613212,0.20335480157948299107,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1989,1,100,<NA>,89227132,0.15882211529435100172,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,1994,1,100,<NA>,101329521,0.000419698501187702,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,NGA,Nigeria,2000,1,100,<NA>,117636475,0.00037438746734637498,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,PER,Peru,1969,1,100,default age range,12603229,0.00346884170750264009,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,PER,Peru,1970,1,100,default age range,12962358,0.0070654130736133398,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SDN,Sudan,2003,1,100,<NA>,28406263,0.0065911726811354902,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SDN,Sudan,2005,1,100,<NA>,29854066,0.05439163130360760018,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SDN,Sudan,2012,1,100,<NA>,70025384,0.098342954903273147035,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SDN,Sudan,2013,1,100,<NA>,35877594,0.00541678015729680964,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1940,1,100,default age range,1816906,0.08645110460344609948,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1944,1,100,default age range,2001254,0.52388648869251497331,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1948,1,100,default age range,2202319,0.56519180855037098876,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1952,1,100,default age range,2492214,0.70766533427869005024,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1956,1,100,default age range,2753651,0.66125717096991798449,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1960,1,100,default age range,3073562,0.61256122317866401605,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1981,1,100,<NA>,5494915,0.12896331914736799962,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1995,1,100,<NA>,8362334,0.01455980125510300018,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,1996,1,100,<NA>,8578656,0.01876510811106549964,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,2002,1,100,<NA>,9916338,0.50384824171575204321,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,2005,1,100,<NA>,10695066,0.01396416998788930011,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SEN,Senegal,2011,0,100,<NA>,13033809,0.01211340723268830057,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SLE,Sierra Leone,1995,1,100,<NA>,4138916,0.08084258180890330214,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SLE,Sierra Leone,1996,1,100,<NA>,4150103,0.03764774858933889884,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SLE,Sierra Leone,2003,1,100,<NA>,10017262,0.05489576827068474996,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SLE,Sierra Leone,2008,1,100,<NA>,5912821,0.09013864344908040227,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,SLE,Sierra Leone,2011,1,100,<NA>,6339182,0.02290512128320299975,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,1945,1,100,default age range,2126787,0.05396471898515550064,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,1948,1,100,default age range,2241031,0.50999392451789904435,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,1952,1,100,default age range,2489240,0.63860334544855201777,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,1956,1,100,default age range,2676118,0.59909097437760905347,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,1960,1,100,default age range,2893149,0.55821619515590903404,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TCD,Chad,2013,1,100,<NA>,12682428,0.09035075247086339634,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1941,1,100,default age range,1025811,0.04349609617319549759,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1944,1,100,default age range,1105700,0.48724075785946802108,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1948,1,100,default age range,1223590,0.9315326079083420252,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1952,1,100,default age range,1386500,0.83103525098918096248,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1956,1,100,default age range,1433238,0.80379143101683203643,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,1960,1,100,default age range,1518126,0.75809000430521400471,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,TGO,Togo,2007,1,100,<NA>,11414600,0.15145738908327664729,both,<NA>
+yf-no-vaccination,"YF:YF,campaign,none:novac",YF,no vaccine,campaign,UGA,Uganda,2011,1,100,<NA>,32112772,0.02172014362572749838,both,<NA>
