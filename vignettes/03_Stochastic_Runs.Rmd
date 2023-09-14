@@ -1,0 +1,37 @@
+---
+  title: "03 - Central Estimates"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{03 - Central Estimates}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Stochastic runs are carried out using the second query in the /src/ folder, 03_burden_stochastic. They depend on the data generated using the 01_input_data_setup query. One run is carried out for each vaccination scenario, each corresponding to a set of input data in the /archive/01_input_data_setup folder. If the folder IDs were saved when input data was generated, the saved information can be used to identify the scenario data:
+
+```{r,eval=FALSE}
+library(YEP)
+path="C:/Users/kjfras16/Documents/GitHub/YF_VIMC_Burden_Orderly/"
+#path=getwd() #Path = repository folder (obtained via getwd() if running from YF_VIMC_Burden_Orderly.Rproj)
+scenario_list=read.csv(file=paste0(path,"/shared/input_data_list.csv"),header=TRUE)
+scenarios=scenario_list$scenario
+input_data_ids=scenario_list$id
+```
+
+```{r,eval=FALSE}
+countries_to_run_file=paste0(path,"/shared/countries_select.csv")
+stochastic_ids=rep("",4)
+for(n_run in 1:length(scenarios)){
+  stochastic_ids[n_run]=orderly2::orderly_run("03_burden_stochastic",
+  list(life_exp_file="gavi_life_expectancy.csv",countries_to_run_file=countries_to_run_file,input_id=input_data_ids[n_run],
+  p_severe_inf=0.12,p_death_severe_inf=0.39,YLD_per_case=0.006486,n_reps=1,flag_cluster=FALSE))
+}
+write.csv(data.frame(scenario=scenarios,id=stochastic_ids),file=paste0(path,"/shared/output_list2_stochastic.csv"),row.names=FALSE)
+```

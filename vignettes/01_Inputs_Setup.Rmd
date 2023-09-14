@@ -1,0 +1,87 @@
+---
+title: "01 - Inputs Setup"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{01 - Inputs Setup}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes how to set up and run the first query in the /src/ folder, 01_inputs_setup. This query loads the population, vaccination and epidemiological parameter data for a model run.
+
+The /R/ folder in the repository contains functions for converting population and vaccination data from GAVI format to format used by YEP; these should be loaded in order to set up inputs.
+
+```{r,eval=FALSE}
+path="C:/Users/kjfras16/Documents/GitHub/YF_VIMC_Burden_Orderly/"
+#path=getwd() #Path = repository folder (obtained via getwd() if running from YF_VIMC_Burden_Orderly.Rproj)
+source(paste0(path,"/R/conversion_functions.R"))
+```
+
+First designate the vaccination scenarios to be run and name the coverage data files to be used for each one. For standard VIMC touchstone data, the coverage data file will usually contain the scenario name. The example below uses the example files stored in the /shared/ folder.
+
+```{r,eval=FALSE}
+scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
+vacc_data_files=rep("",length(scenarios))
+for(n_run in 1:length(scenarios)){
+  vacc_data_files[n_run]=paste0(path,"shared/coverage_202210covidimpact-2_yf-",scenarios[n_run],".csv")
+}
+```
+
+Next load a file containing population data in standard VIMC touchstone format [info TBA?] and a file containing a vector of 3-letter country codes indicating which countries are to be used. These files will be used for every vaccination scenario in the examples below (potentially a different file can be used for each).
+
+```{r,eval=FALSE}
+pop_data_file=paste0(path,"shared/202210covidimpact-2_dds-202208_int_pop_both.Rds")
+country_list_file=paste0(path,"shared/countries_all.csv")
+```
+
+The epidemiological parameters (spillover force of infection FOI, human-to-human basic reproduction number R0, and vaccine efficacy) to be used for model runs also need to be loaded as part of the same query. FOI and R0 values are calculated separately via a linear combination of environmental covariate values using coefficients estimated via a Markov Chain Monte Carlo approach. They are calculated for 1st-level administrative regions and therefore need to be aggregated (via population-weighted averaging) to country level for burden calculations.
+
+Model runs require input for central estimates (using median parameter values) and optionally for stochastic runs (using multiple set of values for each parameter). Files therefore need to be identified containing:
+
+-Median values of FOI and R0 for 1st-level administrative regions covering all countries to be considered (FOI_R0_median_data_regions_file)
+-One or more sets of values of FOI and R0 data for each region (FOI_R0_data_regions_file)
+-One or more values of vaccine efficacy (vaccine_efficacy_data_file), with the number of values corresponding to the number of sets of FOI and R0 values
+-Population data for the 1st-level administrative regions for which FOI and R0 values are supplied, in the YEP input data format (input_data_regions_file)
+
+These files are supplied to the input data setup query along with the median vaccine efficacy (vaccine_efficacy_median). The example below designates example files stored in the /shared/ folder.
+
+Note that:
+
+-The median values used for central estimates may be the medians of the sets of values supplied for stochastic calculations, or they may be different, e.g. they may be the median values drawn from a larger distribution from which the stochastic sets were also drawn
+-If only central estimate runs are to be carried out, FOI_R0_data_regions_file and vaccine_efficacy_data_file can be set to NULL to skip the calculation of stochastic input data.
+
+```{r,eval=FALSE}
+FOI_R0_median_data_regions_file=paste0(path,"shared/FOI_R0_summary_734regions.Rds")
+FOI_R0_data_regions_file=paste0(path,"shared/FOI_R0_2_datasets_734regions.Rds")
+vaccine_efficacy_median=0.9824007
+vaccine_efficacy_data_file=paste0(path,"shared/vacc_eff_2_values.Rds")
+input_data_regions_file=paste0(path,"/shared/input_data_734_regions_burden.Rds")
+```
+
+Next run the first query in the /src/ folder, 01_input_data_setup, for each of the vaccine scenarios. This will convert the population and vaccination data for the designated countries into the format used by YEP along with the . The name of the folder containing the data for each scenario in the /archive/01_input_data_setup/folder can be saved in order to run a particular scenario later. 
+
+```{r,eval=FALSE}
+input_data_ids=rep("",4)
+for(n_run in 1:length(scenarios)){
+  input_data_ids[n_run]=orderly2::orderly_run("01_input_data_setup",
+  list(vacc_data_file=vacc_data_files[n_run],pop_data_file=pop_data_file,country_list_file=country_list_file,
+       FOI_R0_median_data_regions_file=FOI_R0_median_data_regions_file,FOI_R0_data_regions_file=FOI_R0_data_regions_file,
+       vaccine_efficacy_median=vaccine_efficacy_median,vaccine_efficacy_data_file=vaccine_efficacy_data_file,
+       input_data_regions_file=input_data_regions_file))
+}
+write.csv(data.frame(scenario=scenarios,id=input_data_ids),paste0(path,"/shared/input_data_list.csv"),row.names=FALSE)
+```
+
+The scenario to which each folder corresponds can also be retrieved by using orderly_metadata to check the name of the vaccination data file:
+
+```{r,eval=FALSE}
+n_run=1
+vacc_data_file=orderly2::orderly_metadata(dir("archive/01_input_data_setup")[n_run])$parameters$vacc_data_file
+```
