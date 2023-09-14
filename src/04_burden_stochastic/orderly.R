@@ -63,8 +63,9 @@ set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t",set,sep="")
   dataset_single <- Generate_VIMC_Burden_Dataset(input_data,FOI_values[,set],R0_values[,set],template,vaccine_efficacy[set],
-                                                 p_severe_inf,p_death_severe_inf,YLD_per_case,mode_start,
-                                                 start_SEIRV,dt,n_reps,deterministic,mode_parallel,cluster)
+                                          p_severe_inf,p_death_severe_inf,YLD_per_case,mode_start,
+                                          start_SEIRV,dt,n_reps,deterministic,mode_parallel,cluster)
+  colnames(dataset_single)[c(4,5)]=c("country","country_name")
   if(set==1){
     data_out=dataset_single
     nrows=nrow(dataset_single)

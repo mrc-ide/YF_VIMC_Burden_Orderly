@@ -45,7 +45,8 @@ for(n_c in 1:n_countries){
     life_exp_data_subset2=subset(life_exp_data_subset1,year==year2)
     for(i in 1:N_age){
       line=line+1
-      template$life_exp[line]=life_exp_data_subset2$value[findInterval(template$age_min[line],life_exp_data_subset2$age_from)]
+      template$life_exp[line]=life_exp_data_subset2$value[findInterval(template$age_min[line],
+                                                                       life_exp_data_subset2$age_from)]
     }
   }
 }
@@ -60,4 +61,5 @@ set.seed(1)
 dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data,FOI_values,R0_values,template,vaccine_efficacy,
                                         p_severe_inf,p_death_severe_inf,YLD_per_case,mode_start,start_SEIRV,dt,n_reps,
                                         deterministic,"none",NULL)
+colnames(dataset)[c(4,5)]=c("country","country_name")
 write.csv(dataset,file="burden_results_central_estimates.csv",row.names=FALSE)
