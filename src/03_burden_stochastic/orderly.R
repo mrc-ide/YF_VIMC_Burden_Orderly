@@ -65,6 +65,7 @@ if(flag_cluster){
   cluster=NULL
 }
 
+n_param_sets=2
 set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t",set,sep="")
