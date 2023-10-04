@@ -57,11 +57,12 @@ vaccine_efficacy=readRDS("vaccine_efficacy_med.Rds")$vaccine_efficacy_median
 mode_start=1
 start_SEIRV=NULL
 dt=5.0
-deterministic=FALSE
+deterministic=TRUE #Central estimates run deterministically
 
 set.seed(1)
 dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data,FOI_values,R0_values,template,vaccine_efficacy,
                                         p_severe_inf,p_death_severe_inf,YLD_per_case,mode_start,start_SEIRV,dt,n_reps,
                                         deterministic,"none",NULL)
 colnames(dataset)[c(4,5)]=c("country","country_name")
+dataset[,c(6:10)]=round(dataset[,c(6:10)],2) #Round output values to 2 decimal places
 write.csv(dataset,file="burden_results_central_estimates.csv",row.names=FALSE)

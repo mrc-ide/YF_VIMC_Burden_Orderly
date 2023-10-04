@@ -6,8 +6,9 @@ source(paste0(path,"/R/conversion_functions.R")) #Functions for converting popul
 orderly2::orderly_init(path) 
 
 #Create designations for each scenario------------------------------------------
-input_data_ids=vacc_data_files=rep("",4)
-scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
+input_data_ids=vacc_data_files=rep("",1)
+scenarios=c("no-vaccination")
+#scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
 for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run]=paste0(path,"/shared/coverage_202210covidimpact-2_yf-",scenarios[n_run],".csv")
 }
@@ -30,7 +31,7 @@ for(n_run in 1:length(scenarios)){
   input_data_regions_file=input_data_regions_file))
 }
 write.csv(data.frame(scenario=scenarios,id=input_data_ids),"shared/input_data_list.csv",row.names=FALSE)
-#input_data_ids=read.csv("shared/input_data_list.csv",header=TRUE)
+input_data_ids=read.csv("shared/input_data_list.csv",header=TRUE)$id
 
 #Run burden central estimate (median FOI, R0 and vaccine efficacy values), optionally for a subset of countries
 countries_to_run_file=paste0(path,"/shared/countries_select.csv")
