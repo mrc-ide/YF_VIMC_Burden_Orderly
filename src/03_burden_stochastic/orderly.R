@@ -54,7 +54,7 @@ assertthat::assert_that(length(vaccine_efficacy)==n_param_sets)
 mode_start=1
 start_SEIRV=NULL
 dt=5.0
-deterministic=FALSE
+deterministic=FALSE #Stochastic runs run fully stochastically
 
 #Optionally run model in parallel using multiple cores on same computer to increase speed
 if(flag_cluster){
@@ -65,6 +65,7 @@ if(flag_cluster){
   cluster=NULL
 }
 
+n_param_sets=2
 set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t",set,sep="")
@@ -80,6 +81,8 @@ for(set in 1:n_param_sets){
   }
 }
 data_out$set=sort(rep(c(1:n_param_sets),nrows))
+data_out=data_out[,c(c(1:5),11,c(6:10))]
+data_out[,c(7:11)]=round(data_out[,c(7:11)],0) #Round output values to nearest integer
 write.csv(data_out,file="burden_results_stochastic.csv",row.names=FALSE)
 
 if(flag_cluster){parallel::stopCluster(cluster)}

@@ -6,8 +6,9 @@ source(paste0(path,"/R/conversion_functions.R")) #Functions for converting popul
 orderly2::orderly_init(path) 
 
 #Create designations for each scenario------------------------------------------
-input_data_ids=vacc_data_files=rep("",4)
-scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
+input_data_ids=vacc_data_files=rep("",1)
+scenarios=c("no-vaccination")
+#scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
 for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run]=paste0(path,"/shared/coverage_202210covidimpact-2_yf-",scenarios[n_run],".csv")
 }
@@ -17,19 +18,20 @@ for(n_run in 1:length(scenarios)){
 #Median values for central estimates and sets of values for stochastic calculations supplied
 pop_data_file=paste0(path,"/shared/202210covidimpact-2_dds-202208_int_pop_both.Rds")
 country_list_file=paste0(path,"/shared/countries_all.csv")
-FOI_R0_median_data_regions_file=paste0(path,"/shared/FOI_R0_summary_734regions.Rds")
-FOI_R0_data_regions_file=paste0(path,"/shared/FOI_R0_2_datasets_734regions.Rds")
-vaccine_efficacy_median=0.9824007
-vaccine_efficacy_data_file=paste0(path,"/shared/vacc_eff_2_values.Rds")
+FOI_R0_median_data_regions_file=paste0(path,"/shared/FOI_R0_median_734regions.Rds")
+FOI_R0_data_regions_file=paste0(path,"/shared/FOI_R0_200_datasets_734regions.Rds")
+vaccine_efficacy_median=0.9829146
+vaccine_efficacy_data_file=paste0(path,"/shared/vacc_eff_200_values.Rds")
 input_data_regions_file=paste0(path,"/shared/input_data_734_regions_burden.Rds")
 for(n_run in 1:length(scenarios)){
   input_data_ids[n_run]=orderly2::orderly_run("01_input_data_setup",
   list(vacc_data_file=vacc_data_files[n_run],pop_data_file=pop_data_file,country_list_file=country_list_file,
   FOI_R0_median_data_regions_file=FOI_R0_median_data_regions_file, FOI_R0_data_regions_file=FOI_R0_data_regions_file,
-  vaccine_efficacy_median=0.9824007,vaccine_efficacy_data_file=vaccine_efficacy_data_file,
+  vaccine_efficacy_median=vaccine_efficacy_median,vaccine_efficacy_data_file=vaccine_efficacy_data_file,
   input_data_regions_file=input_data_regions_file))
 }
 write.csv(data.frame(scenario=scenarios,id=input_data_ids),"shared/input_data_list.csv",row.names=FALSE)
+input_data_ids=read.csv("shared/input_data_list.csv",header=TRUE)$id
 
 #Run burden central estimate (median FOI, R0 and vaccine efficacy values), optionally for a subset of countries
 countries_to_run_file=paste0(path,"/shared/countries_select.csv")

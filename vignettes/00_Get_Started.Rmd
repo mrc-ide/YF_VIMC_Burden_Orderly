@@ -23,8 +23,9 @@ devtools::install_github("mrc-ide/YEP")
 library(YEP)
 ```
 
-Initialize the repository folder for use with orderly/orderly2:
+Initialize the repository folder for use with orderly/orderly2. The working directory should be set to the repository folder.
 
 ```{r,eval=FALSE}
+path=getwd()
 orderly2::orderly_init(path) 
 ```
