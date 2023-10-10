@@ -1,11 +1,12 @@
 #Central estimate calculations
 
-orderly2::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",
-                             p_severe_inf=0.12,p_death_severe_inf=0.39,YLD_per_case=0.006486,n_reps=1)
+orderly2::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",YLD_per_case=0.006486,n_reps=1)
 orderly2::orderly_shared_resource("life_expectancy.csv"=life_exp_file)
 orderly2::orderly_dependency(name="01_input_data_setup", query=input_id,files=c("input_data_countries.Rds",
                                                                                 "FOI_R0_med_countries.Rds",
-                                                                                "vaccine_efficacy_med.Rds"))
+                                                                                "vaccine_efficacy_med.Rds",
+                                                                                "p_severe_inf_median.Rds",
+                                                                                "p_death_severe_inf_median.Rds"))
 orderly2::orderly_artefact("burden output", "burden_results_central_estimates.csv" )
 
 #To use - use metadata to get name of vaccine data file and thereby scenario name from input_id
@@ -54,6 +55,8 @@ for(n_c in 1:n_countries){
 }
 
 vaccine_efficacy=readRDS("vaccine_efficacy_med.Rds")$vaccine_efficacy_median
+p_severe_inf=readRDS("p_severe_inf_median.Rds")$p_severe_inf_median
+p_death_severe_inf=readRDS("p_death_severe_inf_median.Rds")$p_death_severe_inf_median
 mode_start=1
 start_SEIRV=NULL
 dt=5.0
