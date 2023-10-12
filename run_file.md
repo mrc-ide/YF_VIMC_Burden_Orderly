@@ -6,9 +6,9 @@ source(paste0(path, "/R/conversion_functions.R")) #Functions for converting popu
 orderly2::orderly_init(path) 
 
 #Create designations for each scenario------------------------------------------
-input_data_ids = vacc_data_files = rep("", 1)
-scenarios = c("no-vaccination")
+scenarios=c("preventive-default_update_catchup")
 #scenarios = c("no-vaccination", "preventive-default_nocovid", "preventive-default_update", "preventive-default_update_catchup")
+input_data_ids = vacc_data_files = rep("", length(scenarios))
 for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run] = paste0(path, "/shared/coverage_202210covidimpact-2_yf-", scenarios[n_run], ".csv")
 }
@@ -16,7 +16,7 @@ for(n_run in 1:length(scenarios)){
 #Set up input data - population/vaccination data converted from GAVI population and coverage data
 #FOI/R0 values calculated for each selected country from regional values, vaccine efficacy values loaded
 #Median values for central estimates and sets of values for stochastic calculations supplied
-pop_data_file = paste0(path, "/shared/202210covidimpact-2_dds-202208_int_pop_both.Rds")
+pop_data_file = paste0(path, "/shared/202210covidimpact-2_dds-202208_int_pop_both.Rds") #NB Only goes to 2100 - ideally want to 2101
 country_list_file = paste0(path, "/shared/countries_all.csv")
 FOI_R0_median_data_regions_file = paste0(path, "/shared/FOI_R0_median_734regions.Rds")
 FOI_R0_data_regions_file = paste0(path, "/shared/FOI_R0_200_datasets_734regions.Rds")

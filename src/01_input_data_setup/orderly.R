@@ -26,7 +26,6 @@ cfr_values = readRDS(file = cfr_data_file)
 region_countries = substr(FOI_R0_median_data_regions$region,1,3)
 assertthat::assert_that(all(countries_select %in% unique(region_countries)))
 regions = input_data_regions$region_labels
-#assertthat::assert_that
 n_regions = length(regions)
 assertthat::assert_that(all(FOI_R0_median_data_regions$region == regions))
 n_countries = length(countries_select)
@@ -38,7 +37,8 @@ if(is.null(FOI_R0_data_regions) == FALSE){
 
 #TODO - Add options for these to be non-fixed?
 N_age = 101
-years_data = c(1940:2100)
+years_data = c(1940:2100) #Ideally want 2101 to get output for 2100, but need pop data for 2101
+assertthat::assert_that(all(years_data %in% pop_data$year))
 
 assertthat::assert_that(all(countries_select %in% unique(pop_data$country_code))) #All selected countries must be in pop data
 n_countries = length(countries_select)
@@ -64,9 +64,9 @@ if(any(countries_select %in% unique(vacc_data_select$country_code) == FALSE)){
 #Convert population and vaccination data into arrays and create YEP input data in standard format 
 pop_data_array = convert_pop_data(pop_data_select,year_begin = years_data[1],year_end = max(years_data),N_age = N_age)
 vacc_data_array = convert_vacc_data(vacc_data_select,year_begin = years_data[1],year_end = max(years_data),N_age = N_age)
-input_data_countries = list(region_labels = countries_select,years_labels = years_data,age_labels = c(0:(N_age-1)),
-                vacc_data = vacc_data_array,pop_data = pop_data_array)
-saveRDS(input_data_countries,file = paste0("input_data_countries.Rds"))
+saveRDS(list(region_labels = countries_select,years_labels = years_data,age_labels = c(0:(N_age-1)),
+             vacc_data = vacc_data_array,pop_data = pop_data_array),
+        file = "input_data_countries.Rds")
 
 #Get country epi data-----------------------------------------------------------
 n_years = length(input_data_regions$years_labels)
