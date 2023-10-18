@@ -37,8 +37,8 @@ if(is.null(FOI_R0_data_regions) == FALSE){
 
 #TODO - Add options for these to be non-fixed?
 N_age = 101
-years_data = c(1940:2100) #Ideally want 2101 to get output for 2100, but need pop data for 2101
-assertthat::assert_that(all(years_data %in% pop_data$year))
+years_data = unique(pop_data$year)
+#assertthat::assert_that(all(years_data %in% pop_data$year))
 
 assertthat::assert_that(all(countries_select %in% unique(pop_data$country_code))) #All selected countries must be in pop data
 n_countries = length(countries_select)
