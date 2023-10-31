@@ -19,7 +19,7 @@ n_param_sets = dim(FOI_R0_data_countries$FOI)[2]
 FOI_values = FOI_R0_data_countries$FOI
 R0_values = FOI_R0_data_countries$R0
 life_exp_data = read.csv(file = "life_expectancy.csv", header = TRUE)
-years_data = c(2000:2099)
+years_data = c(2000:2100)
 n_years = length(years_data)
 N_age = 101
 
@@ -79,6 +79,7 @@ for(set in 1:n_param_sets){
                                                       YLD_per_case, mode_start, start_SEIRV, dt, n_reps, deterministic, 
                                                       mode_parallel, cluster)
   colnames(dataset_single)[c(4, 5)] = c("country", "country_name")
+  dataset_single$country_name=translate_country_code(dataset_single$country)
   if(set == 1){
     data_out = dataset_single
     nrows = nrow(dataset_single)

@@ -91,3 +91,16 @@ image_selected_region_data <- function(matrix=matrix(),years=c(2000),ages=c(0:10
   title(main=title)
   
 }
+#-------------------------------------------------------------------------------
+#Translate 3-letter country codes into country names
+translate_country_code <- function(codes=c()){
+  country_codes_all=c("AGO","BDI","BEN","BFA","CAF","CIV","CMR","COD","COG","COL","ECU","ERI","ETH","GHA","GIN","GMB","GNB","KEN",
+                      "LBR","MLI","MRT","NER","NGA","PER","RWA","SDN","SEN","SLE","SOM","SSD","TCD","TGO","TZA","UGA","VEN","ZMB")
+  country_names_all=country_codes_all
+  
+  names=rep("",length(codes))
+  for(i in 1:length(codes)){
+    names[i]=country_names_all[match(codes[i],country_codes_all)]
+  }
+  return(names)
+}

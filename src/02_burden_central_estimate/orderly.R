@@ -25,7 +25,7 @@ assertthat::assert_that(nrow(FOI_R0_med_data_countries)==length(countries_all))
 FOI_values_med=FOI_R0_med_data_countries$FOI_med
 R0_values_med=FOI_R0_med_data_countries$R0_med
 life_exp_data=read.csv(file="life_expectancy.csv",header=TRUE)
-years_data=c(2000:2099)
+years_data=c(2000:2100)
 n_years=length(years_data)
 N_age=101
 
@@ -75,5 +75,6 @@ dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values, R0_values, 
 if(mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
 
 colnames(dataset)[c(4,5)] = c("country", "country_name")
+dataset$country_name=translate_country_code(dataset$country)
 dataset[,c(6:10)] = round(dataset[,c(6:10)],2) #Round output values to 2 decimal places
 write.csv(dataset,file = output_filename, row.names=FALSE)
