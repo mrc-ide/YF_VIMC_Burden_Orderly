@@ -2,6 +2,7 @@
 
 library(YEP)
 path = getwd() #Path = repository folder
+source(paste0(path, "/R/additional_functions.R"))
 source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data from GAVI format to format used by YEP
 
 #Initialize---------------------------------------------------------------------
@@ -30,7 +31,7 @@ for(n_run in 1:length(scenarios)){
   FOI_R0_data_regions_file = paste0(path, "/shared/FOI_R0_200_datasets_734regions.Rds"), 
   vaccine_efficacy_median = 0.6078878, 
   vaccine_efficacy_data_file = paste0(path, "/shared/vacc_eff_200_values.Rds"), 
-  cfr_data_file = paste0(path, "/shared/P_severe_severeDeath.RDS"), 
+  cfr_data_file = paste0(path, "/shared/P_severe_severeDeath_new.RDS"), 
   p_severe_inf_median = 0.12, 
   p_death_severe_inf_median = 0.39, 
   input_data_regions_file = paste0(path, "/shared/input_data_734_regions_burden.Rds")))

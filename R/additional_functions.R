@@ -96,7 +96,11 @@ image_selected_region_data <- function(matrix=matrix(),years=c(2000),ages=c(0:10
 translate_country_code <- function(codes=c()){
   country_codes_all=c("AGO","BDI","BEN","BFA","CAF","CIV","CMR","COD","COG","COL","ECU","ERI","ETH","GHA","GIN","GMB","GNB","KEN",
                       "LBR","MLI","MRT","NER","NGA","PER","RWA","SDN","SEN","SLE","SOM","SSD","TCD","TGO","TZA","UGA","VEN","ZMB")
-  country_names_all=country_codes_all
+  country_names_all=c("Angola","Burundi","Benin","Burkina Faso","Central African Republic","Cote d'Ivoire","Cameroon",
+                      "Congo, the Democratic Republic of the","Congo","Colombia","Ecuador","Eritrea","Ethiopia","Ghana","Guinea",
+                      "Gambia","Guinea-Bissau","Kenya","Liberia","Mali","Mauritania","Niger","Nigeria","Peru","Rwanda","Sudan",
+                      "Senegal","Sierra Leone","Somalia","South Sudan","Chad","Togo","Tanzania","Uganda","Venezuela",
+                      "Zimbabwe")
   
   names=rep("",length(codes))
   for(i in 1:length(codes)){

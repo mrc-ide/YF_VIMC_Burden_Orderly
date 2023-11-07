@@ -74,7 +74,7 @@ dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values, R0_values, 
                                         n_reps, deterministic, mode_parallel, cluster)
 if(mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
 
-colnames(dataset)[c(4,5)] = c("country", "country_name")
+colnames(dataset)[c(4,5,10)] = c("country", "country_name", "yll")
 dataset$country_name=translate_country_code(dataset$country)
 dataset[,c(6:10)] = round(dataset[,c(6:10)],2) #Round output values to 2 decimal places
 write.csv(dataset,file = output_filename, row.names=FALSE)
