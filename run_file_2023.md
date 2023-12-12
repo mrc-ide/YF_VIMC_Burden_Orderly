@@ -63,7 +63,7 @@ time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
   stochastic_ids[n_run] = orderly2::orderly_run("03_burden_stochastic", 
   list(life_exp_file = "gavi_life_expectancy.csv", 
-  countries_to_run_file = paste0(path, "/shared/countries_select.csv"), 
+  countries_to_run_file = paste0(path, "/shared/countries_all.csv"), 
   input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, 
   n_reps = 1, 
