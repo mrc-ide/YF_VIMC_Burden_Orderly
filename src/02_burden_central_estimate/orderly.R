@@ -43,18 +43,16 @@ years_life_exp=unique(life_exp_data$year)
 template=data.frame(region=sort(rep(countries_to_run,N_age*n_years)),year=rep(sort(rep(years_data,N_age)),n_countries),
                     age_min=rep(c(1:N_age)-1,n_years*n_countries),
                     age_max=rep(c(1:N_age),n_years*n_countries),life_exp=rep(NA,nrows))
-line=0
+line0=-N_age
 for(n_c in 1:n_countries){
   life_exp_data_subset1=subset(life_exp_data,country_code==countries_to_run[n_c])
   for(n_year in 1:n_years){
     year1=years_data[n_year]
     year2=years_life_exp[findInterval(year1,years_life_exp)]
     life_exp_data_subset2=subset(life_exp_data_subset1,year==year2)
-    for(i in 1:N_age){
-      line=line+1
-      template$life_exp[line]=life_exp_data_subset2$value[findInterval(template$age_min[line],
-                                                                       life_exp_data_subset2$age_from)]
-    }
+    line0=line0+N_age
+    lines=c(1:N_age)+line0
+    template$life_exp[lines]=life_exp_data_subset2$value[findInterval(template$age_min[lines],life_exp_data_subset2$age_from)]
   }
 }
 

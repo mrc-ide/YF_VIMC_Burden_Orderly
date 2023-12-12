@@ -19,7 +19,7 @@ input_datasets=list()
 for(n_run in 1:length(scenarios)){
   input_datasets[[n_run]]=readRDS(file=paste0("archive/01_input_data_setup/",input_data_ids[n_run],"/input_data_countries.Rds"))
 }
-countries_view=input_datasets[[1]]$region_labels
+countries_view="NGA" #input_datasets[[1]]$region_labels
 par(mfrow=c(2,4),mar=c(4,4,2,2))
 for(n_region in 1:length(countries_view)){
   for(n_run in 1:length(scenarios)){
