@@ -19,7 +19,6 @@ input_datasets=list()
 for(n_run in 1:length(scenarios)){
   input_datasets[[n_run]]=readRDS(file=paste0("archive/01_input_data_setup/",input_data_ids[n_run],"/input_data_countries.Rds"))
 }
-
 countries_view="NGA"#input_datasets[[1]]$region_labels
 par(mfrow=c(2,4),mar=c(4,4,2,2))
 for(n_region in 1:length(countries_view)){
@@ -27,6 +26,12 @@ for(n_region in 1:length(countries_view)){
     if(n_run==1){YEPaux::plot_region_input_data(input_datasets[[n_run]],countries_view[n_region],"pop",colour_scale,NULL)}
     YEPaux::plot_region_input_data(input_datasets[[n_run]],countries_view[n_region],"vacc",colour_scale,NULL)
   }
+}
+
+for(n_run in 1:length(scenarios)){
+YEPaux::plot_region_input_data(input_datasets[[n_run]],countries_view[n_region],"vacc",colour_scale,
+                               paste0("shared/Checks - new dataset/",countries_view[1],"0",n_run,"-",scenarios[n_run],".png"))
+
 }
 
 #Check selected groups of scenarios match up for chosen years
