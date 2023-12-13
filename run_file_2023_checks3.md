@@ -28,6 +28,12 @@ for(n_region in 1:length(countries_view)){
   }
 }
 
+for(n_run in 1:length(scenarios)){
+YEPaux::plot_region_input_data(input_datasets[[n_run]],countries_view[n_region],"vacc",colour_scale,
+                               paste0("shared/Checks - new dataset/",countries_view[1],"0",n_run,"-",scenarios[n_run],".png"))
+
+}
+
 #Check selected groups of scenarios match up for chosen years
 scenario_check_against=5
 scenarios_to_check=c(4,7)
