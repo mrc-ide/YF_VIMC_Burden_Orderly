@@ -52,3 +52,6 @@ orderly_envir.yml
 draft
 archive
 # ---^^^--- added by orderly ---^^^----------------
+
+# Large output files
+burden_results_stochastic.csv
