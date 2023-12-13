@@ -11,7 +11,7 @@ convert_vacc_data <- function(GAVI_vacc_activity_data=list(),year_begin=1940,yea
   years=c(year_begin:year_end)
   n_years=length(years)
   
-  country_list=unique(vacc_activity_data_selected$country_code)
+  country_list=names(table(vacc_activity_data_selected$country_code))
   n_countries=length(country_list)
   vacc_immunity_data=array(NA,dim=c(n_countries,n_years,N_age))
   
