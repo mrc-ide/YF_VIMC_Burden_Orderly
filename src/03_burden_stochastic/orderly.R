@@ -1,14 +1,16 @@
 #Stochastic calculations
 
 orderly2::orderly_parameters(life_exp_file = "", countries_to_run_file = "", input_id = "", 
-                             p_severe_inf = 0.12, p_death_severe_inf = 0.39, YLD_per_case = 0.006486, n_reps = 1, 
-                             flag_cluster = TRUE)
+                             YLD_per_case = 0.006486, n_reps = 1, flag_cluster = TRUE)
 orderly2::orderly_shared_resource("life_expectancy.csv" = life_exp_file)
-orderly2::orderly_dependency(name = "01_input_data_setup",  query = input_id, files = c("input_data_countries.Rds", 
+orderly2::orderly_dependency(name = "01_input_data_setup",  query = input_id, files = c("scenario_name.Rds",
+                                                                                        "input_data_countries.Rds", 
                                                                                         "FOI_R0_countries.Rds", 
                                                                                         "vaccine_efficacy.Rds", 
                                                                                         "cfr.Rds"))
-orderly2::orderly_artefact("burden output", "burden_results_stochastic.csv" )
+scenario_name=readRDS("scenario_name.Rds")
+output_filename=paste0("stochastic_results_",scenario_name,".csv")
+orderly2::orderly_artefact("stochastic burden output", output_filename )
 
 #Load inputs
 input_data = readRDS(file = "input_data_countries.Rds")
@@ -86,7 +88,7 @@ for(set in 1:n_param_sets){
     data_out = rbind(data_out, dataset_single)
   }
 }
-data_out$set = sort(rep(c(1:n_param_sets), nrows))
+data_out$run_id = sort(rep(c(1:n_param_sets), nrows))
 data_out = data_out[, c(c(1:5), 11, c(6:10))]
 data_out[, c(7:11)] = round(data_out[, c(7:11)], 0) #Round output values to nearest integer
 write.csv(data_out, file = "burden_results_stochastic.csv", row.names = FALSE)
