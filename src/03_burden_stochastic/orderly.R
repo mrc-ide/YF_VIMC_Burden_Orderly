@@ -8,9 +8,6 @@ orderly2::orderly_dependency(name = "01_input_data_setup",  query = input_id, fi
                                                                                         "FOI_R0_countries.Rds", 
                                                                                         "vaccine_efficacy.Rds", 
                                                                                         "cfr.Rds"))
-scenario_name=readRDS("scenario_name.Rds")
-output_filename=paste0("stochastic_results_",scenario_name,".csv")
-orderly2::orderly_artefact("stochastic burden output", output_filename )
 
 #Load inputs
 input_data = readRDS(file = "input_data_countries.Rds")
@@ -24,14 +21,20 @@ life_exp_data = read.csv(file = "life_expectancy.csv", header = TRUE)
 years_data = c(2000:2100)
 n_years = length(years_data)
 N_age = 101
-
 countries_to_run = read.csv(file = countries_to_run_file, header = TRUE)$country
 assertthat::assert_that(all(countries_to_run %in% countries_all))
 n_countries = length(countries_to_run)
 nrows = N_age*n_years*n_countries
 
-FOI_values = FOI_values[FOI_R0_data_countries$country %in% countries_to_run, ]
-R0_values = R0_values[FOI_R0_data_countries$country %in% countries_to_run, ]
+#Get scenario name and set output file names
+scenario_name=readRDS("scenario_name.Rds")
+output_filenames=rep("",n_param_sets)
+for(set in 1:n_param_sets){
+  output_filenames[set]=paste0("stochastic_results_",scenario_name,"_",set,".csv")
+  orderly2::orderly_artefact(paste("Output_",set), output_filenames[set] )
+}
+FOI_values = array(FOI_values[FOI_R0_data_countries$country %in% countries_to_run, ],dim=c(n_countries,n_param_sets))
+R0_values = array(R0_values[FOI_R0_data_countries$country %in% countries_to_run, ],dim=c(n_countries,n_param_sets))
 input_data = YEP::input_data_truncate(input_data, regions_new = countries_to_run)
 life_exp_data = subset(life_exp_data, country_code %in% countries_to_run)
 years_life_exp = unique(life_exp_data$year)
@@ -72,25 +75,30 @@ if(flag_cluster){
   cluster = NULL
 }
 
-set.seed(1)
+#set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t", set, sep = "")
+  set.seed(set)
   dataset_single <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values[, set], R0_values[, set], template, 
                                                       vaccine_efficacy[set], p_severe_inf[set], p_death_severe_inf[set], 
                                                       YLD_per_case, mode_start, start_SEIRV, dt, n_reps, deterministic, 
                                                       mode_parallel, cluster)
   colnames(dataset_single)[c(4, 5)] = c("country", "country_name")
   dataset_single$country_name=translate_country_code(dataset_single$country)
-  if(set == 1){
-    data_out = dataset_single
-    nrows = nrow(dataset_single)
-  } else {
-    data_out = rbind(data_out, dataset_single)
-  }
+  dataset_single$run_id=rep(set,nrow(dataset_single))
+  dataset_single=dataset_single[, c(c(1:5), 11, c(6:10))]
+  dataset_single[, c(7:11)] = round(dataset_single[, c(7:11)], 0) #Round output values to nearest integer
+  write.csv(dataset_single, file = output_filenames[set], row.names=FALSE)
+  # if(set == 1){
+  #   data_out = dataset_single
+  #   nrows = nrow(dataset_single)
+  # } else {
+  #   data_out = rbind(data_out, dataset_single)
+  # }
 }
-data_out$run_id = sort(rep(c(1:n_param_sets), nrows))
-data_out = data_out[, c(c(1:5), 11, c(6:10))]
-data_out[, c(7:11)] = round(data_out[, c(7:11)], 0) #Round output values to nearest integer
-write.csv(data_out, file = "burden_results_stochastic.csv", row.names = FALSE)
+# data_out$run_id = sort(rep(c(1:n_param_sets), nrows))
+# data_out = data_out[, c(c(1:5), 11, c(6:10))]
+# data_out[, c(7:11)] = round(data_out[, c(7:11)], 0) #Round output values to nearest integer
+# write.csv(data_out, file = output_filename, row.names = FALSE)
 
 if(flag_cluster){parallel::stopCluster(cluster)}
