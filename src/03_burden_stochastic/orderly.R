@@ -30,7 +30,7 @@ nrows = N_age*n_years*n_countries
 scenario_name=readRDS("scenario_name.Rds")
 output_filenames=rep("",n_param_sets)
 for(set in 1:n_param_sets){
-  output_filenames[set]=paste0("stochastic_results_",scenario_name,"_",set,".csv")
+  output_filenames[set]=paste0("burden_results_stochastic_",scenario_name,"_",set,".csv")
   orderly2::orderly_artefact(paste("Output_",set), output_filenames[set] )
 }
 FOI_values = array(FOI_values[FOI_R0_data_countries$country %in% countries_to_run, ],dim=c(n_countries,n_param_sets))
@@ -78,27 +78,17 @@ if(flag_cluster){
 #set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t", set, sep = "")
-  set.seed(set)
+  #set.seed(set)
   dataset_single <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values[, set], R0_values[, set], template, 
                                                       vaccine_efficacy[set], p_severe_inf[set], p_death_severe_inf[set], 
                                                       YLD_per_case, mode_start, start_SEIRV, dt, n_reps, deterministic, 
-                                                      mode_parallel, cluster)
+                                                      mode_parallel, cluster, seed = set)
   colnames(dataset_single)[c(4, 5)] = c("country", "country_name")
   dataset_single$country_name=translate_country_code(dataset_single$country)
   dataset_single$run_id=set
   dataset_single=dataset_single[, c(c(1:5), 11, c(6:10))]
   dataset_single[, c(7:11)] = round(dataset_single[, c(7:11)], 0) #Round output values to nearest integer
   write.csv(dataset_single, file = output_filenames[set], row.names=FALSE)
-  # if(set == 1){
-  #   data_out = dataset_single
-  #   nrows = nrow(dataset_single)
-  # } else {
-  #   data_out = rbind(data_out, dataset_single)
-  # }
 }
-# data_out$run_id = sort(rep(c(1:n_param_sets), nrows))
-# data_out = data_out[, c(c(1:5), 11, c(6:10))]
-# data_out[, c(7:11)] = round(data_out[, c(7:11)], 0) #Round output values to nearest integer
-# write.csv(data_out, file = output_filename, row.names = FALSE)
 
 if(flag_cluster){parallel::stopCluster(cluster)}

@@ -51,12 +51,16 @@ if(any(countries_select %in% unique(vacc_data_select$country_code) == FALSE)){
   countries_missing = countries_select[countries_select %in% unique(vacc_data_select$country_code) == FALSE]
   n_countries_to_add = length(countries_missing)
   for(i in 1:n_countries_to_add){
-    add_vacc_data = vacc_data_select[1,]
-    add_vacc_data$country_code = add_vacc_data$country = countries_missing[i]
-    add_vacc_data$activity_type = "dummy"
-    add_vacc_data$year = years_data[1]
-    add_vacc_data$target = 0
-    add_vacc_data$coverage = 0
+    #add_vacc_data = vacc_data_select[1,]
+    add_vacc_data = data.frame(scenario=NA,set_name=NA,vaccine=NA,gavi_support=NA,activity_type=NA,
+                               country_code=countries_missing[i],country=countries_missing[i],year=1940,
+                               age_first=1,age_last=100,age_range_verbatim=NA,target=0,
+                               coverage=0,gender="both",proportion_risk=1)
+    # add_vacc_data$country_code = add_vacc_data$country = countries_missing[i]
+    # add_vacc_data$activity_type = "dummy"
+    # add_vacc_data$year = years_data[1]
+    # add_vacc_data$target = 0
+    # add_vacc_data$coverage = 0
     vacc_data_select = rbind(vacc_data_select,add_vacc_data)
   }
   vacc_data_select = vacc_data_select[order(vacc_data_select$country_code),]

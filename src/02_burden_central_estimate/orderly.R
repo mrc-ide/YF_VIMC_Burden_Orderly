@@ -11,7 +11,7 @@ orderly2::orderly_dependency(name="01_input_data_setup", query=input_id,files=c(
                                                                                 "p_death_severe_inf_median.Rds"))
 scenario_name=readRDS("scenario_name.Rds")
 output_filename=paste0("central_estimates_",scenario_name,".csv")
-orderly2::orderly_artefact("burden output", output_filename)
+orderly2::orderly_artefact("burden output central estimate", output_filename)
 
 #To use - use metadata to get name of vaccine data file and thereby scenario name from input_id
 # vacc_data_filename=orderly2::orderly_metadata(input_id)$parameters$vacc_data_file
