@@ -69,7 +69,7 @@ deterministic = FALSE #Stochastic runs run fully stochastically
 #Optionally run model in parallel using multiple cores on same computer to increase speed
 if(flag_cluster){
   mode_parallel = "clusterMap"
-  cluster = parallel::clusterMap(parallel::makeCluster(4))
+  cluster = parallel::makeCluster(4)
 } else{
   mode_parallel = "none"
   cluster = NULL
@@ -85,7 +85,7 @@ for(set in 1:n_param_sets){
                                                       mode_parallel, cluster)
   colnames(dataset_single)[c(4, 5)] = c("country", "country_name")
   dataset_single$country_name=translate_country_code(dataset_single$country)
-  dataset_single$run_id=rep(set,nrow(dataset_single))
+  dataset_single$run_id=set
   dataset_single=dataset_single[, c(c(1:5), 11, c(6:10))]
   dataset_single[, c(7:11)] = round(dataset_single[, c(7:11)], 0) #Round output values to nearest integer
   write.csv(dataset_single, file = output_filenames[set], row.names=FALSE)
