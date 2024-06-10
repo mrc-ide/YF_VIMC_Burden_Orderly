@@ -13,7 +13,7 @@ scenario_prefix="202310gavi-3_yf-"
 # scenarios = c("routine-default","no-vaccination","routine-bluesky","routine-campaign-bluesky",
 #               "routine-campaign-default","routine-ia2030","routine-campaign-ia2030")
 #scenarios = c("routine-default","no-vaccination","routine-campaign-default")
-scenarios = c("routine-default")
+scenarios = c("no-vaccination")
 input_data_ids = vacc_data_files = rep("", length(scenarios))
 for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run] = paste0(path, "/shared/coverage_",scenario_prefix, scenarios[n_run], ".csv")

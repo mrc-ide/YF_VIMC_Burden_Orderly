@@ -78,7 +78,6 @@ if(flag_cluster){
 #set.seed(1)
 for(set in 1:n_param_sets){
   cat("\t", set, sep = "")
-  #set.seed(set)
   dataset_single <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values[, set], R0_values[, set], template, 
                                                       vaccine_efficacy[set], p_severe_inf[set], p_death_severe_inf[set], 
                                                       YLD_per_case, mode_start, start_SEIRV, dt, n_reps, deterministic, 
