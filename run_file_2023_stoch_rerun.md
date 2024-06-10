@@ -10,9 +10,10 @@ orderly2::orderly_init(path)
 
 #Create designations for each scenario------------------------------------------
 scenario_prefix="202310gavi-3_yf-"
-scenarios = c("routine-default","no-vaccination","routine-bluesky","routine-campaign-bluesky",
-             "routine-campaign-default","routine-ia2030","routine-campaign-ia2030")
-#scenarios = c("routine-default")
+# scenarios = c("routine-default","no-vaccination","routine-bluesky","routine-campaign-bluesky",
+#               "routine-campaign-default","routine-ia2030","routine-campaign-ia2030")
+#scenarios = c("routine-default","no-vaccination","routine-campaign-default")
+scenarios = c("routine-default")
 input_data_ids = vacc_data_files = rep("", length(scenarios))
 for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run] = paste0(path, "/shared/coverage_",scenario_prefix, scenarios[n_run], ".csv")
@@ -68,7 +69,7 @@ for(n_run in 1:length(scenarios)){
   input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, 
   n_reps = 1, 
-  flag_cluster = TRUE))
+  flag_cluster = FALSE))
 }
 time2 = Sys.time()
 time_sto = as.numeric(time2-time1)
