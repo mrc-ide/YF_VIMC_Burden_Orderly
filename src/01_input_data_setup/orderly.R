@@ -3,15 +3,15 @@ orderly2::orderly_parameters(scenario_name = "", vacc_data_file = "",pop_data_fi
                              vaccine_efficacy_median = 1.0,vaccine_efficacy_data_file = NULL,
                              p_severe_inf_median = 0.12,p_death_severe_inf_median = 0.39,cfr_data_file = NULL,
                              input_data_regions_file = "")
-orderly2::orderly_artefact("scenario name", "scenario_name.Rds" )
-orderly2::orderly_artefact("country input data", "input_data_countries.Rds" )
-orderly2::orderly_artefact("FOI and R0 median values", "FOI_R0_med_countries.Rds" )
-orderly2::orderly_artefact("FOI and R0 values", "FOI_R0_countries.Rds" )
-orderly2::orderly_artefact("vaccine efficacy median value", "vaccine_efficacy_med.Rds" )
-orderly2::orderly_artefact("vaccine efficacy values", "vaccine_efficacy.Rds" )
-orderly2::orderly_artefact("severe infection rate median value","p_severe_inf_median.Rds")
-orderly2::orderly_artefact("severe infection death rate median value","p_death_severe_inf_median.Rds")
-orderly2::orderly_artefact("Severe infection rate and severe infection death rate values values", "cfr.Rds" )
+orderly2::orderly_artefact(description = "scenario name", "scenario_name.Rds" )
+orderly2::orderly_artefact(description = "country input data", "input_data_countries.Rds" )
+orderly2::orderly_artefact(description = "FOI and R0 median values", "FOI_R0_med_countries.Rds" )
+orderly2::orderly_artefact(description = "FOI and R0 values", "FOI_R0_countries.Rds" )
+orderly2::orderly_artefact(description = "vaccine efficacy median value", "vaccine_efficacy_med.Rds" )
+orderly2::orderly_artefact(description = "vaccine efficacy values", "vaccine_efficacy.Rds" )
+orderly2::orderly_artefact(description = "severe infection rate median value","p_severe_inf_median.Rds")
+orderly2::orderly_artefact(description = "severe infection death rate median value","p_death_severe_inf_median.Rds")
+orderly2::orderly_artefact(description = "Severe infection rate and severe infection death rate values values", "cfr.Rds" )
 
 #Read in files------------------------------------------------------------------
 vacc_data = read.csv(file = vacc_data_file)
