@@ -1,14 +1,14 @@
 #Central estimate calculations
 
-orderly2::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",YLD_per_case=0.006486,n_reps=1,
-                             mode_parallel="none",n_cores=1)
-orderly2::orderly_shared_resource("life_expectancy.csv"=life_exp_file)
-orderly2::orderly_dependency(name="01_input_data_setup", query=input_id,files=c("scenario_name.Rds",
-                                                                                "input_data_countries.Rds",
-                                                                                "FOI_R0_med_countries.Rds",
-                                                                                "vaccine_efficacy_med.Rds",
-                                                                                "p_severe_inf_median.Rds",
-                                                                                "p_death_severe_inf_median.Rds"))
+pars = orderly2::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",YLD_per_case=0.006486,
+                                    n_reps=1,mode_parallel="none",n_cores=1)
+orderly2::orderly_shared_resource("life_expectancy.csv"=pars$life_exp_file)
+orderly2::orderly_dependency(name="input_data_setup", query=pars$input_id,files=c("scenario_name.Rds",
+                                                                                  "input_data_countries.Rds",
+                                                                                  "FOI_R0_med_countries.Rds",
+                                                                                  "vaccine_efficacy_med.Rds",
+                                                                                  "p_severe_inf_median.Rds",
+                                                                                  "p_death_severe_inf_median.Rds"))
 scenario_name=readRDS("scenario_name.Rds")
 output_filename=paste0("central_estimates_",scenario_name,".csv")
 orderly2::orderly_artefact("burden output central estimate", output_filename)
@@ -20,7 +20,7 @@ orderly2::orderly_artefact("burden output central estimate", output_filename)
 
 input_data=readRDS(file = "input_data_countries.Rds")
 countries_all=input_data$region_labels
-FOI_R0_med_data_countries=readRDS("FOI_R0_med_countries.Rds")
+FOI_R0_med_data_countries=readRDS("FOI_R0_med_countries.Rds") #TODO - Adjust treatment for time variation
 assertthat::assert_that(nrow(FOI_R0_med_data_countries)==length(countries_all))
 FOI_values_med=FOI_R0_med_data_countries$FOI_med
 R0_values_med=FOI_R0_med_data_countries$R0_med
@@ -29,7 +29,7 @@ years_data=c(2000:2100)
 n_years=length(years_data)
 N_age=101
 
-countries_to_run=read.csv(file=countries_to_run_file,header=TRUE)$country
+countries_to_run=read.csv(file=pars$countries_to_run_file,header=TRUE)$country
 assertthat::assert_that(all(countries_to_run %in% countries_all))
 n_countries=length(countries_to_run)
 nrows=N_age*n_years*n_countries
@@ -64,13 +64,16 @@ start_SEIRV=NULL
 dt=5.0
 deterministic=TRUE #Central estimates run deterministically
 
-assertthat::assert_that(mode_parallel %in% c("none","clusterMap"))
-if(mode_parallel=="clusterMap"){cluster=parallel::makeCluster(n_cores)}else{cluster=NULL}
+assertthat::assert_that(pars$mode_parallel %in% c("none","clusterMap"))
+if(pars$mode_parallel=="clusterMap"){cluster=parallel::makeCluster(pars$n_cores)}else{cluster=NULL}
 set.seed(1)
-dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values, R0_values, template, vaccine_efficacy,
-                                        p_severe_inf, p_death_severe_inf, YLD_per_case, mode_start, start_SEIRV, dt, 
-                                        n_reps, deterministic, mode_parallel, cluster)
-if(mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
+dataset <- YEP::Generate_VIMC_Burden_Dataset(FOI_values, R0_values, input_data, template, 
+                                             vaccine_efficacy, dt, mode_start, start_SEIRV, mode_time=0,
+                                             pars$n_reps, deterministic, p_severe_inf, p_death_severe_inf, 
+                                             p_rep_severe = 1.0, p_rep_death = 1.0,
+                                             pars$YLD_per_case, mode_parallel, cluster, seed = set,
+                                             xref=NULL)
+if(pars$mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
 
 colnames(dataset)[c(4,5,10)] = c("country", "country_name", "yll")
 dataset$country_name=translate_country_code(dataset$country)

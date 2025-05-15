@@ -27,7 +27,7 @@ p_death_severe_inf_median = 0.39
 cfr_data_file = paste0(path, "/shared/P_severe_severeDeath.RDS")
 input_data_regions_file = paste0(path, "/shared/input_data_734_regions_burden.Rds")
 for(n_run in 1:length(scenarios)){
-  input_data_ids[n_run] = orderly2::orderly_run("01_input_data_setup", 
+  input_data_ids[n_run] = orderly2::orderly_run("input_data_setup", 
   list(vacc_data_file = vacc_data_files[n_run], pop_data_file = pop_data_file, country_list_file = country_list_file, 
   FOI_R0_median_data_regions_file = FOI_R0_median_data_regions_file, FOI_R0_data_regions_file = FOI_R0_data_regions_file, 
   vaccine_efficacy_median = vaccine_efficacy_median, vaccine_efficacy_data_file = vaccine_efficacy_data_file, 
@@ -42,7 +42,7 @@ countries_to_run_file = paste0(path, "/shared/countries_select.csv")
 central_estimate_ids = rep("", 4)
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
-  central_estimate_ids[n_run] = orderly2::orderly_run("02_burden_central_estimate", 
+  central_estimate_ids[n_run] = orderly2::orderly_run("burden_central_estimate", 
   list(life_exp_file = "gavi_life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, n_reps = 1))
 }
@@ -56,7 +56,7 @@ countries_to_run_file = paste0(path, "/shared/countries_select.csv")
 stochastic_ids = rep("", 4)
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
-  stochastic_ids[n_run] = orderly2::orderly_run("03_burden_stochastic", 
+  stochastic_ids[n_run] = orderly2::orderly_run("burden_stochastic", 
   list(life_exp_file = "gavi_life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, n_reps = 1, flag_cluster = FALSE))
 }

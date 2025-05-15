@@ -1,8 +1,8 @@
-orderly2::orderly_parameters(scenario_name = "", vacc_data_file = "",pop_data_file = "",country_list_file = "",
-                             FOI_R0_median_data_regions_file = "",FOI_R0_data_regions_file = NULL,
-                             vaccine_efficacy_median = 1.0,vaccine_efficacy_data_file = NULL,
-                             p_severe_inf_median = 0.12,p_death_severe_inf_median = 0.39,cfr_data_file = NULL,
-                             input_data_regions_file = "")
+pars = orderly2::orderly_parameters(scenario_name = "", vacc_data_file = "",pop_data_file = "",country_list_file = "",
+                                    FOI_R0_median_data_regions_file = "",FOI_R0_data_regions_file = NULL,
+                                    vaccine_efficacy_median = 1.0,vaccine_efficacy_data_file = NULL,
+                                    p_severe_inf_median = 0.12,p_death_severe_inf_median = 0.39,cfr_data_file = NULL,
+                                    input_data_regions_file = "")
 orderly2::orderly_artefact(description = "scenario name", "scenario_name.Rds" )
 orderly2::orderly_artefact(description = "country input data", "input_data_countries.Rds" )
 orderly2::orderly_artefact(description = "FOI and R0 median values", "FOI_R0_med_countries.Rds" )
@@ -11,17 +11,18 @@ orderly2::orderly_artefact(description = "vaccine efficacy median value", "vacci
 orderly2::orderly_artefact(description = "vaccine efficacy values", "vaccine_efficacy.Rds" )
 orderly2::orderly_artefact(description = "severe infection rate median value","p_severe_inf_median.Rds")
 orderly2::orderly_artefact(description = "severe infection death rate median value","p_death_severe_inf_median.Rds")
-orderly2::orderly_artefact(description = "Severe infection rate and severe infection death rate values values", "cfr.Rds" )
+orderly2::orderly_artefact(description = "Severe infection rate and severe infection death rate values values", 
+                           "cfr.Rds" )
 
 #Read in files------------------------------------------------------------------
-vacc_data = read.csv(file = vacc_data_file)
-pop_data = readRDS(file = pop_data_file)
-countries_select = read.csv(file = country_list_file,header = TRUE)$country
-FOI_R0_median_data_regions = readRDS(file = FOI_R0_median_data_regions_file)
-input_data_regions = readRDS(file = input_data_regions_file)
-FOI_R0_data_regions = readRDS(file = FOI_R0_data_regions_file)
-vacc_eff_values = readRDS(file = vaccine_efficacy_data_file)
-cfr_values = readRDS(file = cfr_data_file)
+vacc_data = read.csv(file = pars$vacc_data_file)
+pop_data = readRDS(file = pars$pop_data_file)
+countries_select = read.csv(file = pars$country_list_file,header = TRUE)$country
+FOI_R0_median_data_regions = readRDS(file = pars$FOI_R0_median_data_regions_file)
+input_data_regions = readRDS(file = pars$input_data_regions_file)
+FOI_R0_data_regions = readRDS(file = pars$FOI_R0_data_regions_file)
+vacc_eff_values = readRDS(file = pars$vaccine_efficacy_data_file)
+cfr_values = readRDS(file = pars$cfr_data_file)
 
 #TODO - Add more assert_that checks?
 region_countries = substr(FOI_R0_median_data_regions$region,1,3)
@@ -41,7 +42,7 @@ N_age = 101
 years_data = unique(pop_data$year)
 #assertthat::assert_that(all(years_data %in% pop_data$year))
 
-assertthat::assert_that(all(countries_select %in% unique(pop_data$country_code))) #All selected countries must be in pop data
+assertthat::assert_that(all(countries_select %in% unique(pop_data$country_code)))
 n_countries = length(countries_select)
 pop_data_select = subset(pop_data,country_code %in% countries_select)
 vacc_data_select = subset(vacc_data,country_code %in% countries_select)
@@ -67,15 +68,18 @@ if(any(countries_select %in% unique(vacc_data_select$country_code) == FALSE)){
 }
 
 #Convert population and vaccination data into arrays and create YEP input data in standard format 
-pop_data_array = convert_pop_data(pop_data_select,year_begin = years_data[1],year_end = max(years_data),N_age = N_age)
-vacc_data_array = convert_vacc_data(vacc_data_select,year_begin = years_data[1],year_end = max(years_data),N_age = N_age)
+pop_data_array = convert_pop_data(pop_data_select,year_begin = years_data[1],year_end = max(years_data),
+                                  N_age = N_age)
+vacc_data_array = convert_vacc_data(vacc_data_select,year_begin = years_data[1],year_end = max(years_data),
+                                    N_age = N_age)
 saveRDS(list(region_labels = countries_select,years_labels = years_data,age_labels = c(0:(N_age-1)),
              vacc_data = vacc_data_array,pop_data = pop_data_array),
         file = "input_data_countries.Rds")
 
 #Get country epi data-----------------------------------------------------------
 n_years = length(input_data_regions$years_labels)
-FOI_R0_med_data_countries = data.frame(country = countries_select,FOI_med = rep(0,n_countries),R0_med = rep(0,n_countries))
+FOI_R0_med_data_countries = data.frame(country = countries_select,FOI_med = rep(0,n_countries),
+                                       R0_med = rep(0,n_countries))
 if(n_param_sets>0){
   FOI_R0_data_countries = list(country = countries_select,FOI = array(NA,dim = c(n_countries,n_param_sets)),
                              R0 = array(NA,dim = c(n_countries,n_param_sets)))
@@ -106,13 +110,14 @@ for(n_c in c(1:n_countries)){
 }
 
 #Save epi and additional data---------------------------------------------------
-saveRDS(scenario_name,file="scenario_name.Rds")
+saveRDS(pars$scenario_name,file="scenario_name.Rds")
 saveRDS(FOI_R0_med_data_countries,file = "FOI_R0_med_countries.Rds")
-saveRDS(list(vaccine_efficacy_median = vaccine_efficacy_median),file = "vaccine_efficacy_med.Rds")
-saveRDS(list(p_severe_inf_median = p_severe_inf_median), file = "p_severe_inf_median.Rds")
-saveRDS(list(p_death_severe_inf_median = p_death_severe_inf_median), file = "p_death_severe_inf_median.Rds")
+saveRDS(list(vaccine_efficacy_median = pars$vaccine_efficacy_median),file = "vaccine_efficacy_med.Rds")
+saveRDS(list(p_severe_inf_median = pars$p_severe_inf_median), file = "p_severe_inf_median.Rds")
+saveRDS(list(p_death_severe_inf_median = pars$p_death_severe_inf_median), file = "p_death_severe_inf_median.Rds")
 if(n_param_sets>0){
   saveRDS(FOI_R0_data_countries,file = "FOI_R0_countries.Rds")
   saveRDS(list(vaccine_efficacy = vacc_eff_values),file = "vaccine_efficacy.Rds")
-  saveRDS(data.frame(p_severe_inf = cfr_values$P_severe, p_death_severe_inf = cfr_values$P_severeDeath),file = "cfr.Rds")
+  saveRDS(data.frame(p_severe_inf = cfr_values$P_severe, p_death_severe_inf = cfr_values$P_severeDeath),
+          file = "cfr.Rds")
 }
