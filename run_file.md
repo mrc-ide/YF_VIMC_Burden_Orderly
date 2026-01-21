@@ -1,6 +1,6 @@
 library(YEP)
 path = getwd() #Path = repository folder
-source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data from GAVI format to format used by YEP
+source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data from to format used by YEP
 
 #Initialize---------------------------------------------------------------------
 orderly2::orderly_init(path) 
@@ -13,7 +13,7 @@ for(n_run in 1:length(scenarios)){
   vacc_data_files[n_run] = paste0(path, "/shared/coverage_202210covidimpact-2_yf-", scenarios[n_run], ".csv")
 }
 
-#Set up input data - population/vaccination data converted from GAVI population and coverage data
+#Set up input data - population/vaccination data converted to YEP format
 #FOI/R0 values calculated for each selected country from regional values, vaccine efficacy values loaded
 #Median values for central estimates and sets of values for stochastic calculations supplied
 pop_data_file = paste0(path, "/shared/202210covidimpact-2_dds-202208_int_pop_both.Rds") #NB Only goes to 2100 - ideally want to 2101
@@ -43,7 +43,7 @@ central_estimate_ids = rep("", 4)
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
   central_estimate_ids[n_run] = orderly2::orderly_run("burden_central_estimate", 
-  list(life_exp_file = "gavi_life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
+  list(life_exp_file = "life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, n_reps = 1))
 }
 time2 = Sys.time()
@@ -57,7 +57,7 @@ stochastic_ids = rep("", 4)
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
   stochastic_ids[n_run] = orderly2::orderly_run("burden_stochastic", 
-  list(life_exp_file = "gavi_life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
+  list(life_exp_file = "life_expectancy.csv", countries_to_run_file = countries_to_run_file, input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, n_reps = 1, flag_cluster = FALSE))
 }
 time2 = Sys.time()
