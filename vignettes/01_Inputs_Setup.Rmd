@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describes how to set up and run the first query in the /src/ folder, 01_inputs_setup. This query loads the population, vaccination and epidemiological parameter data for a model run.
+This vignette describes how to set up and run the inputs_setup query. This query loads the population, vaccination and epidemiological parameter data for a model run.
 
 The /R/ folder in the repository contains functions for converting population and vaccination data from GAVI format to format used by YEP; these should be loaded in order to set up inputs.
 
@@ -27,17 +27,18 @@ source(paste0(path,"/R/conversion_functions.R"))
 First designate the vaccination scenarios to be run and name the coverage data files to be used for each one. For standard VIMC touchstone data, the coverage data file will usually contain the scenario name. The example below uses the example files stored in the /shared/ folder.
 
 ```{r,eval=FALSE}
-scenarios=c("no-vaccination","preventive-default_nocovid","preventive-default_update","preventive-default_update_catchup")
+scenarios = c("routine-default","no-vaccination","routine-bluesky","routine-campaign-bluesky",
+              "routine-campaign-default","routine-ia2030","routine-campaign-ia2030")
 vacc_data_files=rep("",length(scenarios))
 for(n_run in 1:length(scenarios)){
-  vacc_data_files[n_run]=paste0(path,"shared/coverage_202210covidimpact-2_yf-",scenarios[n_run],".csv")
+  vacc_data_files[n_run]=paste0(path,"shared/coverage_202310gavi-3_yf-",scenarios[n_run],".csv")
 }
 ```
 
 Next load a file containing population data in standard VIMC touchstone format [info TBA?] and a file containing a vector of 3-letter country codes indicating which countries are to be used. These files will be used for every vaccination scenario in the examples below (potentially a different file can be used for each).
 
 ```{r,eval=FALSE}
-pop_data_file=paste0(path,"shared/202210covidimpact-2_dds-202208_int_pop_both.Rds")
+pop_data_file=paste0(path,"shared/2023_burden_pop_data_1940_2101_36countries.Rds")
 country_list_file=paste0(path,"shared/countries_all.csv")
 ```
 
@@ -70,11 +71,19 @@ Next run the first query in the /src/ folder, 01_input_data_setup, for each of t
 ```{r,eval=FALSE}
 input_data_ids=rep("",4)
 for(n_run in 1:length(scenarios)){
-  input_data_ids[n_run]=orderly2::orderly_run("01_input_data_setup",
-  list(vacc_data_file=vacc_data_files[n_run],pop_data_file=pop_data_file,country_list_file=country_list_file,
-       FOI_R0_median_data_regions_file=FOI_R0_median_data_regions_file,FOI_R0_data_regions_file=FOI_R0_data_regions_file,
-       vaccine_efficacy_median=vaccine_efficacy_median,vaccine_efficacy_data_file=vaccine_efficacy_data_file,
-       input_data_regions_file=input_data_regions_file))
+  input_data_ids[n_run]=orderly::orderly_run("input_data_setup",
+  list(scenario_name=scenarios[n_run],
+    vacc_data_file=vacc_data_files[n_run],
+    pop_data_file=pop_data_file,
+    country_list_file=country_list_file,
+    FOI_R0_median_data_regions_file=FOI_R0_median_data_regions_file,
+    FOI_R0_data_regions_file=FOI_R0_data_regions_file,
+    vaccine_efficacy_median=vaccine_efficacy_median,
+    vaccine_efficacy_data_file=vaccine_efficacy_data_file,
+    cfr_data_file = paste0(path, "/shared/P_severe_severeDeath_new.RDS"), 
+    p_severe_inf_median = 0.12, 
+    p_death_severe_inf_median = 0.39,
+    input_data_regions_file=input_data_regions_file))
 }
 write.csv(data.frame(scenario=scenarios,id=input_data_ids),paste0(path,"/shared/input_data_list.csv"),row.names=FALSE)
 ```
@@ -83,7 +92,7 @@ The scenario to which each folder corresponds can also be retrieved by using ord
 
 ```{r,eval=FALSE}
 n_run=1
-orderly2::orderly_metadata(dir("archive/01_input_data_setup/")[n_run])$parameters$vacc_data_file
+orderly::orderly_metadata(dir(paste0(path,"/archive/input_data_setup/"))[n_run])$parameters$vacc_data_file
 ```
 
 (Note: this may not work when running from vignette for unknown reasons - try copy/pasting to test)

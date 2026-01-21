@@ -1,9 +1,9 @@
 #Central estimate calculations
 
-pars = orderly2::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",YLD_per_case=0.006486,
+pars = orderly::orderly_parameters(life_exp_file="",countries_to_run_file="",input_id="",YLD_per_case=0.006486,
                                     n_reps=1,mode_parallel="none",n_cores=1)
-orderly2::orderly_shared_resource("life_expectancy.csv"=pars$life_exp_file)
-orderly2::orderly_dependency(name="input_data_setup", query=pars$input_id,files=c("scenario_name.Rds",
+orderly::orderly_shared_resource("life_expectancy.csv"=pars$life_exp_file)
+orderly::orderly_dependency(name="input_data_setup", query=pars$input_id,files=c("scenario_name.Rds",
                                                                                   "input_data_countries.Rds",
                                                                                   "FOI_R0_med_countries.Rds",
                                                                                   "vaccine_efficacy_med.Rds",
@@ -11,10 +11,10 @@ orderly2::orderly_dependency(name="input_data_setup", query=pars$input_id,files=
                                                                                   "p_death_severe_inf_median.Rds"))
 scenario_name=readRDS("scenario_name.Rds")
 output_filename=paste0("central_estimates_",scenario_name,".csv")
-orderly2::orderly_artefact("burden output central estimate", output_filename)
+orderly::orderly_artefact(description="burden output central estimate", files=output_filename)
 
 #To use - use metadata to get name of vaccine data file and thereby scenario name from input_id
-# vacc_data_filename=orderly2::orderly_metadata(input_id)$parameters$vacc_data_file
+# vacc_data_filename=orderly::orderly_metadata(input_id)$parameters$vacc_data_file
 # scn_name_start=regexpr("yf",vacc_data_filename)
 # scenario=substr(vacc_data_filename,scn_name_start+3,nchar(vacc_data_filename)-4)
 
@@ -34,8 +34,8 @@ assertthat::assert_that(all(countries_to_run %in% countries_all))
 n_countries=length(countries_to_run)
 nrows=N_age*n_years*n_countries
 
-FOI_values=FOI_values_med[FOI_R0_med_data_countries$country %in% countries_to_run]
-R0_values=R0_values_med[FOI_R0_med_data_countries$country %in% countries_to_run]
+FOI_values=array(FOI_values_med[FOI_R0_med_data_countries$country %in% countries_to_run],dim=c(n_countries,1))
+R0_values=array(R0_values_med[FOI_R0_med_data_countries$country %in% countries_to_run],dim=c(n_countries,1))
 input_data=YEP::input_data_truncate(input_data,regions_new=countries_to_run)
 life_exp_data=subset(life_exp_data,country_code %in% countries_to_run)
 years_life_exp=unique(life_exp_data$year)
@@ -64,15 +64,16 @@ start_SEIRV=NULL
 dt=5.0
 deterministic=TRUE #Central estimates run deterministically
 
-assertthat::assert_that(pars$mode_parallel %in% c("none","clusterMap"))
-if(pars$mode_parallel=="clusterMap"){cluster=parallel::makeCluster(pars$n_cores)}else{cluster=NULL}
+xref = xref=YEP::template_region_xref(template,input_data$region_labels)
+
+assertthat::assert_that(is.logical(pars$mode_parallel))
+if(pars$mode_parallel){cluster=parallel::makeCluster(pars$n_cores)}else{cluster=NULL}
 set.seed(1)
 dataset <- YEP::Generate_VIMC_Burden_Dataset(FOI_values, R0_values, input_data, template, 
                                              vaccine_efficacy, dt, mode_start, start_SEIRV, mode_time=0,
                                              pars$n_reps, deterministic, p_severe_inf, p_death_severe_inf, 
                                              p_rep_severe = 1.0, p_rep_death = 1.0,
-                                             pars$YLD_per_case, mode_parallel, cluster, seed = set,
-                                             xref=NULL)
+                                             pars$YLD_per_case, mode_parallel, cluster, seed = set, xref = xref)
 if(pars$mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
 
 colnames(dataset)[c(4,5,10)] = c("country", "country_name", "yll")

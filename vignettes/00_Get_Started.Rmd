@@ -14,18 +14,25 @@ knitr::opts_chunk$set(
 )
 ```
 
-The code in this repository can be used to run yellow fever burden calculations for one or more countries and for one or more scenarios using the dynamic yellow fever transmission model in the [YEP](https://github.com/mrc-ide/YEP/) package, using standard VIMC touchstone inputs. It uses the [orderly2](https://github.com/mrc-ide/orderly2/) package to organize calculations and aid reproducibility.
+The code in this repository can be used to run yellow fever burden calculations for one or more countries and for one or more scenarios using the dynamic yellow fever transmission model in the [YEP](https://github.com/mrc-ide/YEP/) package, using standard VIMC touchstone inputs. It uses the [orderly](https://github.com/mrc-ide/orderly/) package to organize calculations and aid reproducibility.
 
-To start using the code in the repository, ensure the YEP package is installed and loaded :
+To start using the code in the repository, ensure the correct version of the YEP package is installed and loaded :
 
 ```{r,eval=FALSE}
-devtools::install_github("mrc-ide/YEP")
+devtools::install_github("mrc-ide/YEP",ref="Version-0.2")
 library(YEP)
 ```
 
-Initialize the repository folder for use with orderly/orderly2. The working directory should be set to the repository folder.
+Install orderly:
+
+```{r,eval=FALSE}
+install.packages("orderly",repos = c("https://mrc-ide.r-universe.dev", "https://cloud.r-project.org"))
+library(orderly)
+```
+
+Initialize the repository folder for use with orderly. The working directory should be set to the repository folder.
 
 ```{r,eval=FALSE}
 path=getwd()
-orderly2::orderly_init(path) 
+orderly::orderly_init(path) 
 ```

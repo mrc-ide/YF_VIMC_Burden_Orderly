@@ -1,9 +1,9 @@
 #Stochastic calculations
 
-pars = orderly2::orderly_parameters(life_exp_file = "", countries_to_run_file = "", input_id = "", 
+pars = orderly::orderly_parameters(life_exp_file = "", countries_to_run_file = "", input_id = "", 
                                     YLD_per_case = 0.006486, n_reps = 1, flag_cluster = TRUE)
-orderly2::orderly_shared_resource("life_expectancy.csv" = pars$life_exp_file)
-orderly2::orderly_dependency(name = "input_data_setup",  query = pars$input_id, files = c("scenario_name.Rds",
+orderly::orderly_shared_resource("life_expectancy.csv" = pars$life_exp_file)
+orderly::orderly_dependency(name = "input_data_setup",  query = pars$input_id, files = c("scenario_name.Rds",
                                                                                           "input_data_countries.Rds", 
                                                                                           "FOI_R0_countries.Rds", 
                                                                                           "vaccine_efficacy.Rds", 
@@ -31,7 +31,7 @@ scenario_name=readRDS("scenario_name.Rds")
 output_filenames=rep("",n_param_sets)
 for(set in 1:n_param_sets){
   output_filenames[set]=paste0("burden_results_stochastic_",scenario_name,"_",set,".csv")
-  orderly2::orderly_artefact(paste("Output_",set), output_filenames[set] )
+  orderly::orderly_artefact(description=paste("Output_",set), files=output_filenames[set] )
 }
 FOI_values = array(FOI_values[FOI_R0_data_countries$country %in% countries_to_run, ],dim=c(n_countries,n_param_sets))
 R0_values = array(R0_values[FOI_R0_data_countries$country %in% countries_to_run, ],dim=c(n_countries,n_param_sets))
@@ -68,10 +68,10 @@ deterministic = FALSE #Stochastic runs run fully stochastically
 
 #Optionally run model in parallel using multiple cores on same computer to increase speed
 if(pars$flag_cluster){
-  mode_parallel = "clusterMap"
+  mode_parallel = TRUE
   cluster = parallel::makeCluster(4)
 } else{
-  mode_parallel = "none"
+  mode_parallel = FALSE
   cluster = NULL
 }
 
@@ -79,8 +79,10 @@ xref=YEP::template_region_xref(template,input_data$region_labels)
 
 #set.seed(1)
 for(set in 1:n_param_sets){
+  FOI_values_set=array(FOI_values[, set],dim=c(n_countries,1))
+  R0_values_set=array(R0_values[, set],dim=c(n_countries,1))
   cat("\t", set, sep = "")
-  dataset_single <- YEP::Generate_VIMC_Burden_Dataset(FOI_values[, set], R0_values[, set], input_data, template, 
+  dataset_single <- YEP::Generate_VIMC_Burden_Dataset(FOI_values_set, R0_values_set, input_data, template, 
                                                       vaccine_efficacy[set], dt, mode_start, start_SEIRV, mode_time=0,
                                                       pars$n_reps, deterministic, 
                                                       p_severe_inf[set], p_death_severe_inf[set], 
