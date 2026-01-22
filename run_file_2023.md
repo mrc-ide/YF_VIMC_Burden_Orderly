@@ -35,7 +35,8 @@ for(n_run in 1:length(scenarios)){
   cfr_data_file = paste0(path, "/shared/P_severe_severeDeath_new.RDS"), 
   p_severe_inf_median = 0.12, 
   p_death_severe_inf_median = 0.39, 
-  input_data_regions_file = paste0(path, "/shared/input_data_734_regions_burden.Rds")))
+  input_data_regions_file = paste0(path, "/shared/input_data_734_regions_burden.Rds")),
+  echo=FALSE)
 }
 write.csv(data.frame(scenario = scenarios, id = input_data_ids), "shared/input_data_list.csv", row.names = FALSE)
 input_data_ids = read.csv("shared/input_data_list.csv", header = TRUE)$id
@@ -45,12 +46,12 @@ central_estimate_ids = rep("", length(scenarios))
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
   central_estimate_ids[n_run] = orderly2::orderly_run("02_burden_central_estimate", 
-  list(life_exp_file = "gavi_life_expectancy.csv", 
+  list(life_exp_file = "life_expectancy.csv", 
   countries_to_run_file = paste0(path, "/shared/countries_all.csv"), 
   input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, 
   n_reps = 1,
-  mode_parallel = "clusterMap", 
+  mode_parallel = TRUE, 
   n_cores=4))
 }
 time2 = Sys.time()
@@ -63,7 +64,7 @@ stochastic_ids = rep("", length(scenarios))
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
   stochastic_ids[n_run] = orderly2::orderly_run("03_burden_stochastic", 
-  list(life_exp_file = "gavi_life_expectancy.csv", 
+  list(life_exp_file = "life_expectancy.csv", 
   countries_to_run_file = paste0(path, "/shared/countries_all.csv"), 
   input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, 

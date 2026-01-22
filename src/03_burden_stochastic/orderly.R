@@ -68,20 +68,27 @@ deterministic = FALSE #Stochastic runs run fully stochastically
 
 #Optionally run model in parallel using multiple cores on same computer to increase speed
 if(flag_cluster){
-  mode_parallel = "clusterMap"
+  mode_parallel = TRUE
   cluster = parallel::makeCluster(4)
 } else{
-  mode_parallel = "none"
+  mode_parallel = FALSE
   cluster = NULL
 }
 
+xref=YEP::template_region_xref(template,input_data$region_labels)
+
 #set.seed(1)
 for(set in 1:n_param_sets){
+  FOI_values_set=array(FOI_values[, set],dim=c(n_countries,1))
+  R0_values_set=array(R0_values[, set],dim=c(n_countries,1))
   cat("\t", set, sep = "")
-  dataset_single <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values[, set], R0_values[, set], template, 
-                                                      vaccine_efficacy[set], p_severe_inf[set], p_death_severe_inf[set], 
-                                                      YLD_per_case, mode_start, start_SEIRV, dt, n_reps, deterministic, 
-                                                      mode_parallel, cluster, seed = set)
+  dataset_single <- YEP::Generate_VIMC_Burden_Dataset(FOI_values_set, R0_values_set, input_data, template, 
+                                                      vaccine_efficacy[set], dt, mode_start, start_SEIRV, mode_time=0,
+                                                      n_reps, deterministic, 
+                                                      p_severe_inf[set], p_death_severe_inf[set], 
+                                                      p_rep_severe = 1.0, p_rep_death = 1.0,
+                                                      YLD_per_case, mode_parallel, cluster, seed = set,
+                                                      xref)
   colnames(dataset_single)[c(4, 5)] = c("country", "country_name")
   dataset_single$country_name=translate_country_code(dataset_single$country)
   dataset_single$run_id=set

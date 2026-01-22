@@ -1,13 +1,13 @@
 library(assertthat)
 
 #-------------------------------------------------------------------------------
-# Convert GAVI format vaccination data into 3-D array of immunity data
+# Convert vaccination data into 3-D array of immunity data
 # suitable for use with YEP
-convert_vacc_data <- function(GAVI_vacc_activity_data=list(),year_begin=1940,year_end=2100,N_age=101){
+convert_vacc_data <- function(vacc_activity_data=list(),year_begin=1940,year_end=2100,N_age=101){
   
-  assert_that(is.list(GAVI_vacc_activity_data))
+  assert_that(is.list(vacc_activity_data))
   
-  vacc_activity_data_selected=GAVI_vacc_activity_data[,c(5,6,8,9,10,13)]
+  vacc_activity_data_selected=vacc_activity_data[,c(5,6,8,9,10,13)]
   years=c(year_begin:year_end)
   n_years=length(years)
   

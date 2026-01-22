@@ -1,28 +1,28 @@
 #' get life expectancies in array form
 #'
-#' @param life_exp_GAVI life expectancies from Montagu
+#' @param life_exp life expectancies from Montagu
 #' @param years years on interest
 #' @param ages ages of interest
 #'
 #' @return life expectancies in form years x ages x countries
 #' @export
-reformat_life_expectancies = function(life_exp_GAVI, years, ages){
+reformat_life_expectancies = function(life_exp, years, ages){
 
-  years_le = min(life_exp_GAVI$year) : (max(life_exp_GAVI$year) + 5)
+  years_le = min(life_exp$year) : (max(life_exp$year) + 5)
 
-  ages_le = min(life_exp_GAVI$age_from) : max(life_exp_GAVI$age_to)
+  ages_le = min(life_exp$age_from) : max(life_exp$age_to)
 
-  countries_le = unique(life_exp_GAVI$country_code)
+  countries_le = unique(life_exp$country_code)
 
   life_exp = rep(NA, length(years_le)*length(ages_le)*length(countries_le))
   dim(life_exp) = c(length(years_le), length(ages_le), length(countries_le))
 
-  for(y_ind in 1:length(unique(life_exp_GAVI$year))){
-    for(a_ind in 1:length(unique(life_exp_GAVI$age_to))){
+  for(y_ind in 1:length(unique(life_exp$year))){
+    for(a_ind in 1:length(unique(life_exp$age_to))){
 
       life_exp[((y_ind-1)*5): (y_ind*5),
-               unique(life_exp_GAVI$age_from)[a_ind] : unique(life_exp_GAVI$age_to)[a_ind], ] = dplyr::filter(life_exp_GAVI,
-                                                                                                              year == unique(life_exp_GAVI$year)[y_ind] & age_from == unique(life_exp_GAVI$age_from)[a_ind])$value
+               unique(life_exp$age_from)[a_ind] : unique(life_exp$age_to)[a_ind], ] = dplyr::filter(life_exp,
+                                                                                                              year == unique(life_exp$year)[y_ind] & age_from == unique(life_exp$age_from)[a_ind])$value
 
     }
   }
@@ -43,7 +43,7 @@ reformat_life_expectancies = function(life_exp_GAVI, years, ages){
 #'
 #' @param cases number of cases per year, age and country
 #' @param deaths number of deaths per year, age and country
-#' @param life_exp_GAVI life expectancies from Montagu
+#' @param life_exp life expectancies from Montagu
 #' @param P_severe probability of severe infection
 #' @param d_acute days of acute infection per year. Default = 17.8 / 365.
 #' @param dw_acute disability weight for acute. Default = 0.172.
@@ -54,7 +54,7 @@ reformat_life_expectancies = function(life_exp_GAVI, years, ages){
 #' @export
 calc_DALYs = function(cases,
                       deaths,
-                      life_exp_GAVI,
+                      life_exp,
                       P_severe,
                       d_acute = 17.8 / 365,
                       dw_acute = 0.172,
@@ -62,7 +62,7 @@ calc_DALYs = function(cases,
                       dw_conv = 0.024){
 
   ## convert life expectancy format
-  life_exp = reformat_life_expectancies(life_exp_GAVI,
+  life_exp = reformat_life_expectancies(life_exp,
                                         years = as.numeric(dimnames(cases)[[1]]),
                                         ages = as.numeric(dimnames(cases)[[2]]) )
 

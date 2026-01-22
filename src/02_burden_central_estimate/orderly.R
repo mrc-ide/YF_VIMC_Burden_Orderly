@@ -34,8 +34,8 @@ assertthat::assert_that(all(countries_to_run %in% countries_all))
 n_countries=length(countries_to_run)
 nrows=N_age*n_years*n_countries
 
-FOI_values=FOI_values_med[FOI_R0_med_data_countries$country %in% countries_to_run]
-R0_values=R0_values_med[FOI_R0_med_data_countries$country %in% countries_to_run]
+FOI_values=array(FOI_values_med[FOI_R0_med_data_countries$country %in% countries_to_run],dim=c(n_countries,1))
+R0_values=array(R0_values_med[FOI_R0_med_data_countries$country %in% countries_to_run],dim=c(n_countries,1))
 input_data=YEP::input_data_truncate(input_data,regions_new=countries_to_run)
 life_exp_data=subset(life_exp_data,country_code %in% countries_to_run)
 years_life_exp=unique(life_exp_data$year)
@@ -64,13 +64,17 @@ start_SEIRV=NULL
 dt=5.0
 deterministic=TRUE #Central estimates run deterministically
 
-assertthat::assert_that(mode_parallel %in% c("none","clusterMap"))
-if(mode_parallel=="clusterMap"){cluster=parallel::makeCluster(n_cores)}else{cluster=NULL}
+xref = xref=YEP::template_region_xref(template,input_data$region_labels)
+
+assertthat::assert_that(is.logical(mode_parallel))
+if(mode_parallel){cluster=parallel::makeCluster(n_cores)}else{cluster=NULL}
 set.seed(1)
-dataset <- YEP::Generate_VIMC_Burden_Dataset(input_data, FOI_values, R0_values, template, vaccine_efficacy,
-                                        p_severe_inf, p_death_severe_inf, YLD_per_case, mode_start, start_SEIRV, dt, 
-                                        n_reps, deterministic, mode_parallel, cluster)
-if(mode_parallel=="clusterMap"){parallel::stopCluster(cluster)}
+dataset <- YEP::Generate_VIMC_Burden_Dataset(FOI_values, R0_values, input_data, template, 
+                                             vaccine_efficacy, dt, mode_start, start_SEIRV, mode_time=0,
+                                             n_reps, deterministic, p_severe_inf, p_death_severe_inf, 
+                                             p_rep_severe = 1.0, p_rep_death = 1.0,
+                                             YLD_per_case, mode_parallel, cluster, seed = set, xref = xref)
+if(mode_parallel){parallel::stopCluster(cluster)}
 
 colnames(dataset)[c(4,5,10)] = c("country", "country_name", "yll")
 dataset$country_name=translate_country_code(dataset$country)
