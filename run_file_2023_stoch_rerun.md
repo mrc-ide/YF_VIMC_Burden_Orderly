@@ -3,7 +3,7 @@
 library(YEP)
 path = getwd() #Path = repository folder
 source(paste0(path, "/R/additional_functions.R"))
-source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data to format used by YEP
+source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data from GAVI format to format used by YEP
 
 #Initialize---------------------------------------------------------------------
 orderly2::orderly_init(path) 
@@ -19,11 +19,11 @@ for(n_run in 1:length(scenarios)){
   assertthat::assert_that(file.exists(vacc_data_files[n_run]))
 }
 
-#Set up input data - population/vaccination data converted to YEP format
+#Set up input data - population/vaccination data converted from GAVI population and coverage data
 #FOI/R0 values calculated for each selected country from regional values, vaccine efficacy values loaded
 #Median values for central estimates and sets of values for stochastic calculations supplied
 for(n_run in 1:length(scenarios)){
-  input_data_ids[n_run] = orderly2::orderly_run("input_data_setup", 
+  input_data_ids[n_run] = orderly2::orderly_run("01_input_data_setup", 
   list(scenario_name = paste0(scenario_prefix,scenarios[n_run]),
   vacc_data_file = vacc_data_files[n_run], 
   pop_data_file = paste0(path, "/shared/2023_burden_pop_data_1940_2101_36countries.Rds"), 
@@ -44,8 +44,8 @@ input_data_ids = read.csv("shared/input_data_list.csv", header = TRUE)$id
 # central_estimate_ids = rep("", length(scenarios))
 # time1 = Sys.time()
 # for(n_run in 1:length(scenarios)){
-#   central_estimate_ids[n_run] = orderly2::orderly_run("burden_central_estimate",
-#   list(life_exp_file = "life_expectancy.csv",
+#   central_estimate_ids[n_run] = orderly2::orderly_run("02_burden_central_estimate",
+#   list(life_exp_file = "gavi_life_expectancy.csv",
 #   countries_to_run_file = paste0(path, "/shared/countries_all.csv"),
 #   input_id = input_data_ids[n_run],
 #   YLD_per_case = 0.006486,
@@ -62,8 +62,8 @@ input_data_ids = read.csv("shared/input_data_list.csv", header = TRUE)$id
 stochastic_ids = rep("", length(scenarios))
 time1 = Sys.time()
 for(n_run in 1:length(scenarios)){
-  stochastic_ids[n_run] = orderly2::orderly_run("burden_stochastic", 
-  list(life_exp_file = "life_expectancy.csv", 
+  stochastic_ids[n_run] = orderly2::orderly_run("03_burden_stochastic", 
+  list(life_exp_file = "gavi_life_expectancy.csv", 
   countries_to_run_file = paste0(path, "/shared/countries_all.csv"), 
   input_id = input_data_ids[n_run], 
   YLD_per_case = 0.006486, 

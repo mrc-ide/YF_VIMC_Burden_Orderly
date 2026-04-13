@@ -1,23 +1,27 @@
 library(assertthat)
 
 #-------------------------------------------------------------------------------
-# Convert vaccination data into 3-D array of immunity data
+# Convert GAVI format vaccination data into 3-D array of immunity data
 # suitable for use with YEP
-convert_vacc_data <- function(vacc_activity_data=list(),year_begin=1940,year_end=2100,N_age=101){
+convert_vacc_data <- function(GAVI_vacc_activity_data=list(),year_begin=1940,year_end=2100,
+                              N_age=101){
   
-  assert_that(is.list(vacc_activity_data))
+  assert_that(is.list(GAVI_vacc_activity_data))
   
-  vacc_activity_data_selected=vacc_activity_data[,c(5,6,8,9,10,13)]
+  vacc_activity_data_select=GAVI_vacc_activity_data[,colnames(GAVI_vacc_activity_data) %in% 
+                                                        c("activity_type","country_code","year",
+                                                          "age_first","age_last","coverage")]
   years=c(year_begin:year_end)
   n_years=length(years)
   
-  country_list=names(table(vacc_activity_data_selected$country_code))
+  country_list=unique(vacc_activity_data_select$country_code)
+  country_list2=sort(country_list)
   n_countries=length(country_list)
   vacc_immunity_data=array(NA,dim=c(n_countries,n_years,N_age))
   
   for(n_country in 1:n_countries){
-    country_select=country_list[n_country]
-    vacc_activity_data_country=subset(vacc_activity_data_selected,country_code==country_select)
+    country_select=country_list2[n_country]
+    vacc_activity_data_country=subset(vacc_activity_data_select,country_code==country_select)
     
     coverage_values=vacc_immunity_data_country=array(0,dim=c(n_years,N_age))
     for(i in 1:nrow(vacc_activity_data_country)){
@@ -58,15 +62,23 @@ convert_pop_data <- function(pop_data_long=list(),year_begin=1940,year_end=2100,
   
   years=c(year_begin:year_end)
   n_years=length(years)
-  pop_data_selected=pop_data_long[,c(2,6,4,5,8)]
+  if("country_code" %in% colnames(pop_data_long)){
+    pop_data_selected=pop_data_long[,c(2,6,4,5,8)] #Old style
+  } else {
+    pop_data_selected = pop_data_long #New style
+    colnames(pop_data_selected)[colnames(pop_data_selected)=="country"]="country_code"
+    colnames(pop_data_selected)[colnames(pop_data_selected)=="age"]="age_from"
+    assert_that(all(colnames(pop_data_selected)==c("country_code","year","age_from","gender","value")))
+  }
   pop_data_selected=subset(pop_data_selected,year %in% years)
   
-  country_list=names(table(pop_data_selected$country_code))
+  country_list=unique(pop_data_selected$country_code)
   n_countries=length(country_list)
+  country_list2=sort(country_list)
   pop_data_array=array(0,dim=c(n_countries,n_years,N_age))
   
   for(n_country in 1:n_countries){
-    country_select=country_list[n_country]
+    country_select=country_list2[n_country]
     pop_data_country=subset(pop_data_selected,country_code==country_select)
     
     for(i in 1:nrow(pop_data_country)){
