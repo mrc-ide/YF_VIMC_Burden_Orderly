@@ -5,3 +5,5 @@ This repository contains code for running yellow fever burden calculations for t
 The code in this repository requires the YEP (Yellow Fever Epidemic Prevention) (https://github.com/mrc-ide/YEP/) and orderly (https://github.com/mrc-ide/orderly/) packages. It is organized into a user-friendly framework using orderly. See the vignette files for examples of running a set of scenarios using example files in the /shared/ folder.
 
 Note that due to ongoing development of the YEP package, it is necessary to use version 0.2 of YEP to run code in this repository. The first vignette file (00_Get_Started.Rmd) shows how to install the correct version.
+
+To re-run the most recent official VIMC model runs, please use the branch 2023-runs: https://github.com/mrc-ide/YF_VIMC_Burden_Orderly/tree/2023-runs
