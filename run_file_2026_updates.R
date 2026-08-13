@@ -9,8 +9,7 @@ setwd(path)
 #install.packages("orderly2",repos = c("https://mrc-ide.r-universe.dev", "https://cloud.r-project.org"))
 library(orderly2)
 #orderly2::orderly_init(force=TRUE)
-#devtools::install_github("mrc-ide/YEP",ref="Frozen_Model_2023_Paper&VIMC") 
-#devtools::install_github("mrc-ide/YEP",ref="Version-0.2-milestone") 
+#pak::pak("mrc-ide/YEP@Version-0.2-milestone") 
 library(YEP)
 source(paste0(path, "/R/additional_functions.R"))
 source(paste0(path, "/R/conversion_functions.R")) #Functions for converting population and vaccination data from GAVI format to format used by YEP
@@ -19,9 +18,7 @@ source(paste0(path, "/R/conversion_functions.R")) #Functions for converting popu
 new_data_folder=paste0(path,"/shared/rapid-model-run-inputs_20260313-130448-a2599490")
 scenario_name = "2026_updates"
 vacc_data_file = paste0(new_data_folder,"/scenario-1-default-Routine and Campaign.csv")
-#pop_data_file = paste0(new_data_folder,"/demography-int_pop.rds")
 pop_data_file = paste0(path,"/shared/2023_burden_pop_data_1940_2101_36countries.Rds")
-#country_list_reruns=c("AGO","COL","BDI","ECU","ERI","GMB","KEN","MRT","PER","RWA","SOM","TZA","UGA","ZMB")
 country_list_reruns=c("AGO","BDI","COL","ECU","ERI","GMB","KEN","MRT","PER","RWA","SOM","TZA","UGA","ZMB")
 country_list_file = paste0(path,"/shared/country_list_reruns.csv")
 write.csv(data.frame(country=country_list_reruns),file=country_list_file,row.names=FALSE)
@@ -56,10 +53,7 @@ central_estimate_id = orderly2::orderly_run("02b_burden_central_estimate",
 #Run stochastic burden calculations using all parameter sets (containing individual FOI, R0 and vaccine efficacy values), 
 #optionally for a subset of countries
 
-# unloadNamespace("YEP")
-# devtools::install_github("mrc-ide/YEP",ref="Version-0.2-milestone") 
-# library(YEP)
-input_data_id = "20260317-122217-8a212683"
+#input_data_id = "20260317-122217-8a212683"
 stochastic_id = orderly2::orderly_run("03_burden_stochastic", 
                                       list(life_exp_file = "gavi_life_expectancy.csv", 
                                            countries_to_run_file = country_list_file, 
